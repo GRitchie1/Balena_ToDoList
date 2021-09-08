@@ -1,0 +1,49 @@
+h1 {
+    color: rgb(100, 6, 6);
+}
+
+.navbar {
+    background-color: lightgray;
+    padding: 8px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    border-style: solid;
+    padding: 5px;
+}
+
+a:hover {
+    background-color: darkgrey;
+}
+
+.item { grid-area: loc;}
+.description { grid-area: desc; }
+.item-form { grid-area: frm; }
+
+.item-container {
+    display: grid;
+    grid-template-areas: 
+      'loc loc  loc desc desc desc desc desc frm';
+    column-gap: 5px;
+    background-color: lightslategray;
+    padding: 5px;
+ }
+
+ .item-container > div.item {
+     text-align: right;
+ }
+
+ .item-container > div {
+    background-color: lightgray;
+    text-align: left;
+}
+
+input.comp {
+    background-color: #5cb85c;
+}
+
+input.uncomp {
+    background-color: #d9534f;
+}

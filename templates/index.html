@@ -1,0 +1,19 @@
+<!-- extend from "base.html" here -->
+{% extends "base.html" %}
+<!-- begin block content here -->
+ 
+{% block content %}
+
+<h1>Hello {{name}}</h1> 
+
+<div class="navbar">
+  <!-- begin for loop here -->
+  {% for category, label in categories.items() %}
+
+    <a href={{category}}>{{label}}</a> <!-- set attribute and text here -->
+  <!-- end for loop here -->
+  {% endfor %}
+  </div>
+
+
+ {% endblock %}

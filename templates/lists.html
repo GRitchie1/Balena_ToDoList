@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+
+<h1>{{category | title}}</h1> 
+
+<div class="navbar">
+  
+  {% for category, label in categories.items() %}
+
+    <a href={{category}}>{{label}}</a> 
+  {% endfor %}
+
+  </div>
+  <table>
+    <colgroup>
+      <col style="width: 20%">
+      <col style="width: 70%">
+      <col style="width: 10%">
+    </colgroup>
+    <tbody class="itemtable">
+        
+        {% for item in list_items %}
+        <tr>
+          <td class="item">{{item['name']}}</td>
+          <td class="desc">{{item['description']}}</td> 
+          <td class="btns">
+            
+          
+            <form method="POST">
+              {% if item.category in ["todo"] %}
+              <input type="submit" class="comp" name="{{item['name']}}" value="Y";> 
+              {% elif item.category in ["complete"] %}
+              <input type="submit" class="uncomp" name="{{item['name']}}" value="X"> 
+              {% endif %}
+            </form>
+            
+            
+          </td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+  </table>
+
+ {% endblock %}
