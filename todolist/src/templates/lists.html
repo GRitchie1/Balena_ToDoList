@@ -1,44 +1,51 @@
 {% extends "base.html" %}
- 
+
 {% block content %}
 
-<h1>{{category | title}}</h1> 
+<h1>{{categories[category] | title}}</h1>
 
 <div class="navbar">
-  
+
   {% for category, label in categories.items() %}
 
-    <a href={{category}}>{{label}}</a> 
+    <a href={{category}}>{{label}}</a>
   {% endfor %}
 
   </div>
-  <table>
+  <table id= itemtable>
     <colgroup>
       <col style="width: 20%">
       <col style="width: 70%">
       <col style="width: 10%">
     </colgroup>
-    <tbody class="itemtable">
-        
+    <thead>
+      <!-- <tr class = "table-header">
+        <td class="item">Name</td>
+        <td class="desc">Description</td>
+        <td class="item-form">Actions</td>
+      </tr> -->
+    </thead>
+    <tbody>
+
         {% for item in list_items %}
-        <tr>
+        <tr class = "item-container">
           <td class="item">{{item['name']}}</td>
-          <td class="desc">{{item['description']}}</td> 
-          <td class="btns">
-            
-          
+          <td class="desc">{{item['description']}}</td>
+          <td class="item-form">
+
+
             <form method="POST">
               {% if item.category in ["todo"] %}
-              <input type="submit" class="comp" name="{{item['name']}}" value="Y";> 
+              <input type="submit" class="comp" name="{{item['name']}}" value="Y";>
               {% elif item.category in ["complete"] %}
-              <input type="submit" class="uncomp" name="{{item['name']}}" value="X"> 
+              <input type="submit" class="uncomp" name="{{item['name']}}" value="X">
               {% endif %}
             </form>
-            
-            
+
+
           </td>
         </tr>
-        
+
         {% endfor %}
     </tbody>
   </table>

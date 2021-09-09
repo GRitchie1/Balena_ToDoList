@@ -1,44 +1,77 @@
 h1 {
-    color: rgb(100, 6, 6);
+    color: rgb(200, 6, 6);
 }
 
 .navbar {
     background-color: lightgray;
-    padding: 8px;
+    padding: 10px;
 }
 
 a {
     text-decoration: none;
     color: black;
     border-style: solid;
-    padding: 5px;
+    padding: 8px;
 }
 
 a:hover {
     background-color: darkgrey;
 }
 
-.item { grid-area: loc;}
-.description { grid-area: desc; }
-.item-form { grid-area: frm; }
+.item {
+  grid-area: itm;
+  padding:10px;
+  border-left:2px solid lightslategray;
+}
+.desc {
+  grid-area: desc;
+  border-left:2px solid lightslategray;
+  border-right:2px solid lightslategray;
+  padding-left:30px;
+  padding:10px;
+}
+.item-form {
+  grid-area: btns;
+  padding:10px;
+  border-right:2px solid lightslategray;
+}
 
 .item-container {
     display: grid;
-    grid-template-areas: 
-      'loc loc  loc desc desc desc desc desc frm';
-    column-gap: 5px;
-    background-color: lightslategray;
-    padding: 5px;
+    grid-template-areas:
+      'itm itm itm desc desc desc desc desc desc btns';
+    column-gap: 100px;
+
+    border-bottom: 2px solid lightslategray;
+
+
  }
 
  .item-container > div.item {
      text-align: right;
+
  }
 
  .item-container > div {
     background-color: lightgray;
     text-align: left;
 }
+.item-container:first-child {border-top: 2px solid lightslategray;}
+.item-container:nth-child(odd) {background-color:inherit;}
+.item-container:nth-child(even) {background-color:lightgray;}
+
+
+.table-header {
+    display: grid;
+    grid-template-areas:
+      'itm itm itm desc desc desc desc desc desc btns';
+    column-gap: 100px;
+
+    border-bottom: 2px solid lightslategray;
+
+
+ }
+
 
 input.comp {
     background-color: #5cb85c;
