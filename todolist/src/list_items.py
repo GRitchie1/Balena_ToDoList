@@ -37,7 +37,7 @@ class List_Items:
             self.list_items[i].category = "complete"
 
     def load_data(self):
-        with open("data.csv", "r") as csvfile:
+        with open("/usr/src/app/data.csv", "r") as csvfile:
             list_items = csv.reader(csvfile)
             for row in list_items:
                 self.add(row[0], row[1], row[2])
@@ -52,7 +52,3 @@ class Item:
         self.name = name
         self.description = description
         self.category = category
-
-    
-
-    

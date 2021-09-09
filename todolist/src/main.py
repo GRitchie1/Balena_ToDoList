@@ -23,17 +23,17 @@ def locations(category):
   list_items = lists.get_list_by_category(category)
 
   if request.method == "POST":
-    
+
     [(name, action)] = request.form.items()
 
     if action == COMP_ACTION:
       lists.complete(name)
-      
+
     elif action == UNCOMP_ACTION:
       lists.uncomplete(name)
-  
+
   return render_template("lists.html",category=category, categories=categories,list_items=list_items)
 
 
-
-app.run(host='0.0.0.0', port=8080)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)

@@ -1,0 +1,11 @@
+version: '2'
+services:
+  todolist:
+    build: ./todolist
+    restart: always
+    privileged: true
+    network_mode: host
+    labels:
+      io.balena.features.supervisor-api: '1'
+    ports:
+      - 80:80
