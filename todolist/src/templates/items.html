@@ -31,6 +31,7 @@
     <div class = item-steps">
       {% for step in item.steps %}
         <p>{{step.number}} - {{step.name}} </p>
+        <p>Complete: {{step.complete}}</p>
       {% endfor %}
     </div>
 
@@ -41,6 +42,7 @@
         {% elif item.category in ["complete"] %}
         <input type="submit" class="uncomp" name="{{item['name']}}" value="X">
         {% endif %}
+        <input type="submit" class="del" name="{{item['name']}}" value="Delete">
       </form>
     </div>
   </div>

@@ -98,6 +98,11 @@ input.rand {
     font-size: 2em;
 }
 
+input.del {
+    background-color: #d9534f;
+    font-size: 2em;
+}
+
 .random{
   margin: 20px;
   border:2px solid lightslategray;

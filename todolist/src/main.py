@@ -44,7 +44,7 @@ def list(category):
         global random_item
         random_item = random.choice(rand_items)
     elif action == "Edit":
-        return redirect(url_for("item",name = str(name)))
+        return redirect(url_for("item",name = name))
 
 
   return render_template("lists.html",category=category, categories=categories,list_items=list_items,random_item=random_item)
@@ -60,9 +60,11 @@ def item(name):
 
        if action == COMP_ACTION:
            lists.complete(name)
-
        elif action == UNCOMP_ACTION:
            lists.uncomplete(name)
+       elif action == "Delete":
+           lists.delete(name)
+           return redirect(url_for("list",category = item.category))
 
     step = Step("Step 1",1)
     item.add_step(step)
