@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>{{categories[category] | title}}</h1>
+<h1>{{categories[category] | title}} </h1>
 
 <div class="navbar">
 
@@ -12,6 +12,12 @@
   {% endfor %}
 
   </div>
+
+  <div>
+    <h3>Todays random item is: {{random_item.name}}</h3>
+
+  </div>
+    <br><br><br><br>
   <table id= itemtable>
     <colgroup>
       <col style="width: 20%">
