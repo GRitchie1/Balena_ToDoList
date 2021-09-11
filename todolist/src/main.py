@@ -13,6 +13,8 @@ random_item = []
 COMP_ACTION = "Y"
 UNCOMP_ACTION = "X"
 
+
+#Main url to redirect to login page
 @app.route('/')
 def toDo():
   name= "gregor"
@@ -20,14 +22,8 @@ def toDo():
   return render_template("index.html", name=name, categories = categories)
 
 
-@app.route("/<category>/<int:rand>", methods=["GET"])
-def get_random(category,rand=0):
-    list_items = lists.get_list_by_category("todo")
-    if rand == 1:
-        global random_item
-        random_item = random.choice(list_items)
-    return redirect(url_for("items",category=category))
 
+#Main Categories Route
 @app.route("/<category>", methods=["GET", "POST"])
 def items(category):
   list_items = lists.get_list_by_category(category)
@@ -37,10 +33,15 @@ def items(category):
     [(name, action)] = request.form.items()
 
     if action == COMP_ACTION:
-      lists.complete(name)
+        lists.complete(name)
 
     elif action == UNCOMP_ACTION:
-      lists.uncomplete(name)
+        lists.uncomplete(name)
+
+    elif action == "Random":
+        rand_items = lists.get_list_by_category("todo")
+        global random_item
+        random_item = random.choice(rand_items)
 
 
   return render_template("lists.html",category=category, categories=categories,list_items=list_items,random_item=random_item)
