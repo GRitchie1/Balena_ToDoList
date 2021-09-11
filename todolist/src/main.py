@@ -22,7 +22,7 @@ def toDo():
 
 #Main Categories Route
 @app.route("/<category>", methods=["GET", "POST"])
-def items(category):
+def list(category):
   list_items = lists.get_list_by_category(category)
 
   if request.method == "POST":
@@ -49,7 +49,7 @@ def items(category):
 def item(name):
     item_index = lists.get_index_by_name(name)
     item = lists.get_item_by_index(item_index)
-    return str(item_index) + " - " + item.name
+    return render_template("items.html", categories=categories,item=item)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
