@@ -36,8 +36,6 @@
           <td class="item">{{item['name']}}</td>
           <td class="desc">{{item['description']}}</td>
           <td class="item-form">
-
-
             <form method="POST">
               {% if item.category in ["todo"] %}
               <input type="submit" class="comp" name="{{item['name']}}" value="Y">
@@ -45,8 +43,12 @@
               <input type="submit" class="uncomp" name="{{item['name']}}" value="X">
               {% endif %}
             </form>
+          </td>
 
-
+          <td class="item-edit">
+            <form method="POST">
+              <input type="submit" class="edit" name="{{item['name']}}" value="Edit">
+            </form>
           </td>
         </tr>
 

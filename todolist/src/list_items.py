@@ -47,6 +47,10 @@ class List_Items:
             print(f'{list_item.name} - {list_item.description} - {list_item.category}')
 
 
+    def get_item_by_index(self, i):
+        return self.list_items[i]
+
+
 class Item:
     def __init__(self, name, description, category):
         self.name = name

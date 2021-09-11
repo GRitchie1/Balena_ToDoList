@@ -53,12 +53,16 @@ a:hover {
   grid-area: btns;
   padding:10px;
 }
+.item-edit {
+  grid-area: edit;
+  padding:10px;
+}
 
 .item-container {
     display: grid;
     grid-template-areas:
-      'itm itm itm desc desc desc desc desc desc btns';
-    column-gap: 100px;
+      'itm itm itm desc desc desc desc desc desc btns edit';
+    column-gap: 70px;
     margin-left: 20px;
     border-bottom: 2px solid lightslategray;
     border-left: 2px solid lightslategray;

@@ -39,11 +39,17 @@ def items(category):
         rand_items = lists.get_list_by_category("todo")
         global random_item
         random_item = random.choice(rand_items)
+    elif action == "Edit":
+        return redirect(url_for("item",name = str(name)))
 
 
   return render_template("lists.html",category=category, categories=categories,list_items=list_items,random_item=random_item)
 
-
+@app.route("/item/<name>", methods=["GET", "POST"])
+def item(name):
+    item_index = lists.get_index_by_name(name)
+    item = lists.get_item_by_index(item_index)
+    return str(item_index) + " - " + item.name
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
