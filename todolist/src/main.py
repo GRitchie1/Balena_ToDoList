@@ -45,6 +45,8 @@ def list(category):
         random_item = random.choice(rand_items)
     elif action == "Edit":
         return redirect(url_for("item",name = name))
+    elif action == "Add New Item":
+        return redirect(url_for("add_item"))
 
 
   return render_template("lists.html",category=category, categories=categories,list_items=list_items,random_item=random_item)
@@ -69,6 +71,12 @@ def item(name):
     step = Step("Step 1",1)
     item.add_step(step)
     return render_template("items.html", categories=categories,item=item)
+
+
+@app.route("/add_item", methods=["GET", "POST"])
+def add_item():
+    return(render_template("add_item.html",categories=categories))
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

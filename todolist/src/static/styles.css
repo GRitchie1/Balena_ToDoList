@@ -103,15 +103,19 @@ input.del {
     font-size: 2em;
 }
 
+input.add {
+    background-color: #5cb85c;
+    font-size: 2em;
+}
+
 .random{
-  margin: 20px;
   border:2px solid lightslategray;
   background-color: lightgray;
   padding:20px;
   width: 100%;
   display: grid;
   grid-template-rows: 95% 5%;
-  height:80%;
+  height:85%;
 
 }
 
@@ -120,17 +124,17 @@ input.del {
 
 .lists-grid-container {
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 10px;
   grid-template-columns: 70% 20% 10%;
   padding: 10px;
   margin-right:20px;
   width:100%;
-  height: 80%;
+  height: 90%;
 }
 
 .item-grid-container {
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 10px;
   grid-template-columns: 10% 65% 25%;
   padding: 10px;
   margin-right:20px;
@@ -141,4 +145,9 @@ input.del {
 
 .item-left-menu{
   grid-row: 1 / span 2;
+}
+
+.lists-add-new-item{
+  grid-column: 1 / span 3;
+  margin-left:20px;
 }
