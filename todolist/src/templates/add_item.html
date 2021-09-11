@@ -14,6 +14,27 @@
   </div>
 </header>
 
+<div class="item-grid-container">
+  <div class ="item-left-menu">
 
-</div>
+    </div>
+    <div class = item-info">
+      <form method="POST">
+        <p>Name</p>
+        <input type="text" name = "name">
+        <p>Description</p>
+        <textarea name="desc" rows="8" cols="80"></textarea>
+        <p>Description</p>
+        <select name="category" id="category">
+          {% for category,label in categories.items() %}
+          <option value={{category}}> {{label}}</option>
+          {% endfor %}
+        </select>
+        <br>
+        <br>
+        <input type="submit" class="add" name="add-new-item" value="Add">
+      </form>
+    </div>
+  </div>
+
  {% endblock %}
