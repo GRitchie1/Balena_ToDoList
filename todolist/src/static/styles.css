@@ -89,6 +89,10 @@ input.uncomp {
     background-color: #d9534f;
 }
 
+input.rand {
+    background-color: #5cb85c;
+    font-size: 2em;
+}
 
 .random{
   margin: 20px;
@@ -96,6 +100,9 @@ input.uncomp {
   background-color: lightgray;
   padding:20px;
   width: 100%;
+  display: grid;
+  grid-template-rows: 95% 5%;
+  height:80%;
 
 }
 
@@ -109,6 +116,5 @@ input.uncomp {
   padding: 10px;
   margin-right:20px;
   width:100%;
-  height:80%;
-
+  height: 80%;
 }

@@ -54,13 +54,19 @@
     </tbody>
   </table>
 
-  <div class = "random"
-    <h3>Todays random item is: {{random_item.name}}</h3>
+  <div class = "random">
+    <div class = random-info">
+    <h3>Todays random item is: </h3>
+    <h1> {{random_item.name}} </h1>
+    <p> {{random_item.description}} </p>
+    </div>
+
+    <div class = random-btns">
     <form method="POST">
-      <input type="submit" class="comp" name="rand" value="Random">
+      <input type="submit" class="rand" name="rand" value="Random">
 
     </form>
-
+    </div>
   </div>
 </div>
  {% endblock %}
