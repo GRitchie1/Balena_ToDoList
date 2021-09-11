@@ -15,6 +15,7 @@
 
   <div>
     <h3>Todays random item is: {{random_item.name}}</h3>
+    <a href="{{category}}/1"> refresh</a>
 
   </div>
     <br><br><br><br>
@@ -42,7 +43,7 @@
 
             <form method="POST">
               {% if item.category in ["todo"] %}
-              <input type="submit" class="comp" name="{{item['name']}}" value="Y";>
+              <input type="submit" class="comp" name="{{item['name']}}" value="Y">
               {% elif item.category in ["complete"] %}
               <input type="submit" class="uncomp" name="{{item['name']}}" value="X">
               {% endif %}

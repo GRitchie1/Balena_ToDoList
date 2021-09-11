@@ -22,7 +22,7 @@ def toDo():
 
 @app.route("/<category>/<int:rand>", methods=["GET"])
 def get_random(category,rand=0):
-    list_items = lists.get_list_by_category(category)
+    list_items = lists.get_list_by_category("todo")
     if rand == 1:
         global random_item
         random_item = random.choice(list_items)
