@@ -56,3 +56,15 @@ class Item:
         self.name = name
         self.description = description
         self.category = category
+        self.steps = []
+
+    def add_step(self,step):
+        self.steps.append(step)
+        self.steps = sorted(self.steps, key=lambda x: x.number)
+
+
+class Step:
+    def __init__(self, name, number):
+        self.name= name
+        self.number = number
+        self.complete = False

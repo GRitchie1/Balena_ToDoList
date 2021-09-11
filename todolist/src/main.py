@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
-from list_items import List_Items
+from list_items import List_Items, Item, Step
 import random
 
-app = Flask('__name__')
+app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SECRET_PROJECT'
 
 
@@ -64,6 +64,8 @@ def item(name):
        elif action == UNCOMP_ACTION:
            lists.uncomplete(name)
 
+    step = Step("Step 1",1)
+    item.add_step(step)
     return render_template("items.html", categories=categories,item=item)
 
 if __name__ == '__main__':

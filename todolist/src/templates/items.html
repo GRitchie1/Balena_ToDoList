@@ -26,6 +26,12 @@
       <p> {{item.category}} </p>
       <h3>Description</h3>
       <p> {{item.description}} </p>
+
+    </div>
+    <div class = item-steps">
+      {% for step in item.steps %}
+        <p>{{step.number}} - {{step.name}} </p>
+      {% endfor %}
     </div>
 
     <div class = item-btns">
