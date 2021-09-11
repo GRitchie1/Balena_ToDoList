@@ -14,14 +14,18 @@
   </div>
 </header>
 
-<h1> {{item.name}} </h1>
-<p> {{item.description}} </p>
 
-<div class="grid-container">
-  <div class = "item">
+
+
+<div class="item-grid-container">
+  <div class ="item-left-menu">
+
+    </div>
     <div class = item-info">
-    <h1> {{item.name}} </h1>
-    <p> {{item.description}} </p>
+      <h3>Category</h3>
+      <p> {{item.category}} </p>
+      <h3>Description</h3>
+      <p> {{item.description}} </p>
     </div>
 
     <div class = item-btns">
@@ -34,5 +38,5 @@
       </form>
     </div>
   </div>
-</div>
+
  {% endblock %}
