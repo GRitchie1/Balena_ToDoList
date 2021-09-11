@@ -1,10 +1,30 @@
-h1 {
-    color: rgb(200, 6, 6);
+html,
+body {
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
 }
 
+
+h1 {
+    color: black;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 1000;
+    font-size: 3em;
+}
+
+header {
+  background-color: grey;
+  margin-top:-25px;
+  padding:10px 0px 0px 10px;
+  width:100%;
+}
 .navbar {
     background-color: lightgray;
     padding: 10px;
+    margin-left: -10px;
 }
 
 a {
@@ -21,7 +41,6 @@ a:hover {
 .item {
   grid-area: itm;
   padding:10px;
-  border-left:2px solid lightslategray;
 }
 .desc {
   grid-area: desc;
@@ -33,7 +52,6 @@ a:hover {
 .item-form {
   grid-area: btns;
   padding:10px;
-  border-right:2px solid lightslategray;
 }
 
 .item-container {
@@ -41,9 +59,10 @@ a:hover {
     grid-template-areas:
       'itm itm itm desc desc desc desc desc desc btns';
     column-gap: 100px;
-
+    margin-left: 20px;
     border-bottom: 2px solid lightslategray;
-
+    border-left: 2px solid lightslategray;
+    border-right: 2px solid lightslategray;
 
  }
 
@@ -61,17 +80,6 @@ a:hover {
 .item-container:nth-child(even) {background-color:lightgray;}
 
 
-.table-header {
-    display: grid;
-    grid-template-areas:
-      'itm itm itm desc desc desc desc desc desc btns';
-    column-gap: 100px;
-
-    border-bottom: 2px solid lightslategray;
-
-
- }
-
 
 input.comp {
     background-color: #5cb85c;
@@ -79,4 +87,13 @@ input.comp {
 
 input.uncomp {
     background-color: #d9534f;
+}
+
+
+.random{
+  margin: 20px;
+  border:2px solid lightslategray;
+  background-color: lightgray;
+  padding:20px;
+
 }

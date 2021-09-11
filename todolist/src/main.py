@@ -10,9 +10,6 @@ lists= List_Items()
 categories = {"todo":"To Do","complete":"Complete",}
 random_item = []
 
-COMP_ACTION = "Y"
-UNCOMP_ACTION = "X"
-
 
 #Main url to redirect to login page
 @app.route('/')
@@ -32,10 +29,10 @@ def items(category):
 
     [(name, action)] = request.form.items()
 
-    if action == COMP_ACTION:
+    if action == "Y":
         lists.complete(name)
 
-    elif action == UNCOMP_ACTION:
+    elif action == "X":
         lists.uncomplete(name)
 
     elif action == "Random":
