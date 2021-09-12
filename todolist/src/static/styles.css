@@ -97,6 +97,10 @@ input.rand {
     background-color: #5cb85c;
     font-size: 2em;
 }
+input.snooze {
+    background-color: #d9534f;
+    font-size: 2em;
+}
 
 input.del {
     background-color: #d9534f;
