@@ -33,9 +33,6 @@ class Item(db.Model):
     def __repr__(self):
         return "Item ID: {}, Name: {}, Description: {}, Snoozed: {}, Complete: {}".format(self.id, self.name, self.description, self.snoozed, self.complete)
 
-
-
-
 class Step(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50), index = True, unique = False)
@@ -54,17 +51,17 @@ class Step(db.Model):
 db.create_all() #Create database - initialise tables
 
 #Data for testing
-#with open("/usr/src/app/data.csv", "r") as csvfile:
-#    list_items = csv.reader(csvfile)
-#    id_counter = 0
-#    for row in list_items:
-#        id_counter=id_counter+1
-#        item = Item(id = id_counter,name = row[0], description = row[1], complete = False)
-#        db.session.add(item)
-#        try:
-#            db.session.commit()
-#        except Exception:
-#            db.session.rollback()
+with open("/usr/src/app/data.csv", "r") as csvfile:
+    list_items = csv.reader(csvfile)
+    id_counter = 0
+    for row in list_items:
+        id_counter=id_counter+1
+        item = Item(id = id_counter,name = row[0], description = row[1], complete = False)
+        db.session.add(item)
+        try:
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
 
 
 
@@ -104,10 +101,35 @@ def list(category):
             global random_item
             random_item = random.choice(rand_items)
         elif action == "Edit":
-            return redirect(url_for("item",name = name))
+            return redirect(url_for("item",item_id = name))
         elif action == "Add New Item":
             return redirect(url_for("add_item"))
     return render_template("lists.html",category=category, categories=categories,list_items=list_items,random_item=random_item)
+
+
+@app.route("/item/<item_id>", methods=["GET", "POST"])
+def item(item_id):
+    item = Item.query.get(item_id)
+
+    if request.method == "POST":
+
+       [(name, action)] = request.form.items()
+
+       if action == COMP_ACTION:
+           item = Item.query.get(name)
+           item.complete = True
+           db.session.commit()
+       elif action == UNCOMP_ACTION:
+           item = Item.query.get(name)
+           item.complete = False
+           db.session.commit()
+       elif action == "Delete":
+           lists.delete(name)
+           return redirect(url_for("list",category = item.category))
+
+    #step = Step("Step 1",1)
+    #item.add_step(step)
+    return render_template("items.html", categories=categories,item=item)
 
 
 if __name__ == '__main__':

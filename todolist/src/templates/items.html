@@ -22,8 +22,8 @@
 
     </div>
     <div class = item-info">
-      <h3>Category</h3>
-      <p> {{item.category}} </p>
+      <h3>Complete</h3>
+      <p> {{item.complete}} </p>
       <h3>Description</h3>
       <p> {{item.description}} </p>
 
@@ -37,12 +37,12 @@
 
     <div class = item-btns">
       <form method="POST">
-        {% if item.category in ["todo"] %}
-        <input type="submit" class="comp" name="{{item['name']}}" value="Y">
-        {% elif item.category in ["complete"] %}
-        <input type="submit" class="uncomp" name="{{item['name']}}" value="X">
+        {% if item.complete == False %}
+        <input type="submit" class="comp" name="{{item.id}}" value="Y">
+        {% elif item.complete == True %}
+        <input type="submit" class="uncomp" name="{{item.id}}" value="X">
         {% endif %}
-        <input type="submit" class="del" name="{{item['name']}}" value="Delete">
+        <input type="submit" class="del" name="{{item.id}}" value="Delete">
       </form>
     </div>
   </div>
