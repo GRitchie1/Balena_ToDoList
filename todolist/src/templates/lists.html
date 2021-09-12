@@ -65,7 +65,9 @@
     <div class = random-btns">
     <form method="POST">
       <input type="submit" class="rand" name="rand" value="Random">
-
+      {% if random_item.name %}
+      <input type="submit" class="snooze" name="{{random_item.id}}" value="Snooze">
+      {% endif %}
     </form>
     </div>
   </div>
