@@ -5,6 +5,9 @@
 {% block content %}
 
 <h1>Hello {{name}}</h1>
+{% for item in items_list %}
+<p> {{item.name}} </p>
+{% endfor %}
 
 <div class="navbar">
   <!-- begin for loop here -->

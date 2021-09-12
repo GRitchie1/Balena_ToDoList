@@ -36,10 +36,10 @@
           <td class="desc">{{item['description']}}</td>
           <td class="item-form">
             <form method="POST">
-              {% if item.category in ["todo"] %}
-              <input type="submit" class="comp" name="{{item['name']}}" value="Y">
-              {% elif item.category in ["complete"] %}
-              <input type="submit" class="uncomp" name="{{item['name']}}" value="X">
+              {% if item.complete == False %}
+              <input type="submit" class="comp" name="{{item.item_id}}" value="Y">
+              {% elif item.category == True %}
+              <input type="submit" class="uncomp" name="{{item.item_id}}" value="X">
               {% endif %}
             </form>
           </td>
