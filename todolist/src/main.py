@@ -86,22 +86,26 @@ def list(category):
 
         [(name, action)] = request.form.items()
 
+        #Item table actions
         if action == COMP_ACTION:
             item = Item.query.get(name)
             item.complete = True
             db.session.commit()
-
         elif action == UNCOMP_ACTION:
             item = Item.query.get(name)
             item.complete = False
             db.session.commit()
-
-        elif action == "Random":
-            rand_items = lists.get_list_by_category("todo")
-            global random_item
-            random_item = random.choice(rand_items)
         elif action == "Edit":
             return redirect(url_for("item",item_id = name))
+
+        #Random item actions
+        elif action == "Random":
+            rand_items = Item.query.filter(Item.snoozed == False).all()
+            global random_item
+            random_item = random.choice(rand_items)
+
+
+        #Other actions
         elif action == "Add New Item":
             return redirect(url_for("add_item"))
     return render_template("lists.html",category=category, categories=categories,list_items=list_items,random_item=random_item)
