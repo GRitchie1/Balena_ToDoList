@@ -37,16 +37,16 @@
           <td class="item-form">
             <form method="POST">
               {% if item.complete == False %}
-              <input type="submit" class="comp" name="{{item.item_id}}" value="Y">
-              {% elif item.category == True %}
-              <input type="submit" class="uncomp" name="{{item.item_id}}" value="X">
+              <input type="submit" class="comp" name="{{item.id}}" value="Y">
+              {% elif item.complete == True %}
+              <input type="submit" class="uncomp" name="{{item.id}}" value="X">
               {% endif %}
             </form>
           </td>
 
           <td class="item-edit">
             <form method="POST">
-              <input type="submit" class="edit" name="{{item['name']}}" value="Edit">
+              <input type="submit" class="edit" name="{{item.id}}" value="Edit">
             </form>
           </td>
         </tr>

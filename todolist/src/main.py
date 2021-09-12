@@ -48,24 +48,25 @@ class Step(db.Model):
 
 
 #Remove database each restart for testing
-if os.path.exists('toDoListDB.db'):
-  os.remove('toDoListDB.db')
+#if os.path.exists('toDoListDB.db'):
+#  os.remove('toDoListDB.db')
 
-db.create_all()
-
+db.create_all() #Create database - initialise tables
 
 #Data for testing
-with open("/usr/src/app/data.csv", "r") as csvfile:
-    list_items = csv.reader(csvfile)
-    id_counter = 0
-    for row in list_items:
-        id_counter=id_counter+1
-        item = Item(id = id_counter,name = row[0], description = row[1], complete = False)
-        db.session.add(item)
-        try:
-            db.session.commit()
-        except Exception:
-            db.session.rollback()
+#with open("/usr/src/app/data.csv", "r") as csvfile:
+#    list_items = csv.reader(csvfile)
+#    id_counter = 0
+#    for row in list_items:
+#        id_counter=id_counter+1
+#        item = Item(id = id_counter,name = row[0], description = row[1], complete = False)
+#        db.session.add(item)
+#        try:
+#            db.session.commit()
+#        except Exception:
+#            db.session.rollback()
+
+
 
 #Main url to redirect to login page
 @app.route('/')
@@ -79,29 +80,34 @@ def toDo():
 #Main Categories Route
 @app.route("/<category>", methods=["GET", "POST"])
 def list(category):
-  list_items = Item.query.filter(Item.complete == False)
+    if category == "todo":
+        list_items = Item.query.filter(Item.complete == False)
+    if category == "complete":
+        list_items = Item.query.filter(Item.complete == True)
 
-  if request.method == "POST":
+    if request.method == "POST":
 
-    [(name, action)] = request.form.items()
+        [(name, action)] = request.form.items()
 
-    if action == COMP_ACTION:
-        Item.complete(name)
+        if action == COMP_ACTION:
+            item = Item.query.get(name)
+            item.complete = True
+            db.session.commit()
 
-    elif action == UNCOMP_ACTION:
-        Item.uncomplete(name)
+        elif action == UNCOMP_ACTION:
+            item = Item.query.get(name)
+            item.complete = False
+            db.session.commit()
 
-    elif action == "Random":
-        rand_items = lists.get_list_by_category("todo")
-        global random_item
-        random_item = random.choice(rand_items)
-    elif action == "Edit":
-        return redirect(url_for("item",name = name))
-    elif action == "Add New Item":
-        return redirect(url_for("add_item"))
-
-
-  return render_template("lists.html",category=category, categories=categories,list_items=list_items,random_item=random_item)
+        elif action == "Random":
+            rand_items = lists.get_list_by_category("todo")
+            global random_item
+            random_item = random.choice(rand_items)
+        elif action == "Edit":
+            return redirect(url_for("item",name = name))
+        elif action == "Add New Item":
+            return redirect(url_for("add_item"))
+    return render_template("lists.html",category=category, categories=categories,list_items=list_items,random_item=random_item)
 
 
 if __name__ == '__main__':
