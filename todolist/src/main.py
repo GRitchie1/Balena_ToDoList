@@ -124,8 +124,10 @@ def item(item_id):
            item.complete = False
            db.session.commit()
        elif action == "Delete":
-           lists.delete(name)
-           return redirect(url_for("list",category = item.category))
+           item = Item.query.get(name)
+           db.session.delete(item)
+           db.session.commit()
+           return redirect(url_for("list",category = "todo"))
 
     #step = Step("Step 1",1)
     #item.add_step(step)
