@@ -141,6 +141,9 @@ def item(item_id):
     #item.add_step(step)
     return render_template("items.html", categories=categories,item=item)
 
+@app.route("/add_item", methods=["GET", "POST"])
+def add_item():
+    return(render_template("add_item.html",categories=categories))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
