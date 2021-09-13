@@ -33,6 +33,27 @@
         <p>{{step.number}} - {{step.name}} </p>
         <p>Complete: {{step.complete}}</p>
       {% endfor %}
+
+      <form action = "{{url_for('add_step_submit', item_id = item.id)}}" class="addform"  method="POST" >
+
+          {{ add_step.hidden_tag() }}
+          <table>
+            <tbody>
+              <tr>
+                <td>{{add_step.name.label}}</td>
+                <td>{{add_step.name()}}</td>
+
+              </tr>
+              <tr>
+                <td>{{add_step.number.label}}</td>
+                <td>{{add_step.number()}}</td>
+              </tr>
+              <tr>
+                <td>{{add_step.submit()}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
     </div>
 
     <div class = item-btns">

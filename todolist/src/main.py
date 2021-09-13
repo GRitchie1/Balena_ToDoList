@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import random
 import csv
 import os
-from forms import AddItemForm
+from forms import AddItemForm, AddStepForm
 
 
 app = Flask(__name__)
@@ -58,7 +58,9 @@ with open("/usr/src/app/data.csv", "r") as csvfile:
     for row in list_items:
         id_counter=id_counter+1
         item = Item(id = id_counter, name = row[0], description = row[1], complete = False)
+        step = Step(name= "Step 1", number = 1, item_id = id_counter)
         db.session.add(item)
+        db.session.add(step)
         try:
             db.session.commit()
         except Exception:
@@ -147,7 +149,7 @@ def item(item_id):
 
     #step = Step("Step 1",1)
     #item.add_step(step)
-    return render_template("items.html", categories=categories,item=item)
+    return render_template("items.html", categories=categories,item=item, add_step = AddStepForm())
 
 @app.route("/add_item", methods=["GET", "POST"])
 def add_item():
@@ -166,6 +168,19 @@ def add_item_submit():
         except Exception:
             db.session.rollback()
     return(redirect(url_for("list",category = "todo")))
+
+@app.route("/<item_id>/add_step_submit", methods=["POST"])
+def add_step_submit(item_id):
+    add_step_form = AddStepForm()
+    if add_step_form.validate_on_submit():
+
+        step = Step(name = add_step_form.name.data, number = add_step_form.number.data, item_id = item_id)
+        db.session.add(step)
+        try:
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+    return(redirect(url_for("item",item_id = item_id)))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
