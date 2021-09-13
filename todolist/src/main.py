@@ -110,6 +110,11 @@ def list(category):
             db.session.commit()
             rand_items = Item.query.filter(Item.snoozed == False, Item.complete == False).all()
             random_item = random.choice(rand_items)
+        elif action == "Reset Snooze":
+            snoozed_items = Item.query.filter(Item.snoozed == True).all()
+            for item in snoozed_items:
+                item.snoozed = False
+                db.session.commit()
 
         #Other actions
         elif action == "Add New Item":

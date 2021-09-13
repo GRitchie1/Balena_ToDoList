@@ -98,21 +98,21 @@ input.uncomp {
 
 input.rand {
     background-color: #5cb85c;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 input.snooze {
     background-color: #d9534f;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 input.del {
     background-color: #d9534f;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 input.add {
     background-color: #5cb85c;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .random{
