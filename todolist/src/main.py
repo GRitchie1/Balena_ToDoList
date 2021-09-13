@@ -79,8 +79,10 @@ def toDo():
 def list(category):
     if category == "todo":
         list_items = Item.query.filter(Item.complete == False)
-    if category == "complete":
+    elif category == "complete":
         list_items = Item.query.filter(Item.complete == True)
+    else:
+        list_items = Item.query.all()
 
     if request.method == "POST":
         global random_item
@@ -100,13 +102,13 @@ def list(category):
 
         #Random item actions
         elif action == "Random":
-            rand_items = Item.query.filter(Item.snoozed == False).all()
+            rand_items = Item.query.filter(Item.snoozed == False, Item.complete == False).all()
             random_item = random.choice(rand_items)
         elif action == "Snooze":
             item = Item.query.get(name)
             item.snoozed = True
             db.session.commit()
-            rand_items = Item.query.filter(Item.snoozed == False).all()
+            rand_items = Item.query.filter(Item.snoozed == False, Item.complete == False).all()
             random_item = random.choice(rand_items)
 
         #Other actions
