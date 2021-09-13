@@ -75,7 +75,8 @@ def toDo():
   name= "gregor"
   items_list = Item.query.all()
   print(items_list)
-  return render_template("index.html", name=name, items_list=items_list, categories=categories)
+  #return render_template("index.html", name=name, items_list=items_list, categories=categories)
+  return redirect(url_for('list', category='todo'))
 
 
 #Main Categories Route
