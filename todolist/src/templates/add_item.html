@@ -19,21 +19,33 @@
 
     </div>
     <div class = item-info">
-      <form method="POST">
-        <p>Name</p>
-        <input type="text" name = "name">
-        <p>Description</p>
-        <textarea name="desc" rows="8" cols="80"></textarea>
-        <p>Description</p>
-        <select name="category" id="category">
-          {% for category,label in categories.items() %}
-          <option value={{category}}> {{label}}</option>
-          {% endfor %}
-        </select>
-        <br>
-        <br>
-        <input type="submit" class="add" name="add-new-item" value="Add">
-      </form>
+
+
+
+
+      <form action = "{{url_for('add_item_submit')}}" class="addform"  method="POST" >
+
+    {{ add_item.hidden_tag() }}
+    <table>
+      <tbody>
+        <tr>
+          <td>{{add_item.name.label}}</td>
+          <td>{{add_item.name()}}</td>
+
+        </tr>
+        <tr>
+          <td>{{add_item.description.label}}</td>
+          <td>{{add_item.description()}}</td>
+        </tr>
+        <tr>
+          <td>{{add_item.submit()}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+
+
     </div>
   </div>
 

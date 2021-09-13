@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import random
 import csv
 import os
+from forms import AddItemForm
 
 
 app = Flask(__name__)
@@ -56,7 +57,7 @@ with open("/usr/src/app/data.csv", "r") as csvfile:
     id_counter = 0
     for row in list_items:
         id_counter=id_counter+1
-        item = Item(id = id_counter,name = row[0], description = row[1], complete = False)
+        item = Item(id = id_counter, name = row[0], description = row[1], complete = False)
         db.session.add(item)
         try:
             db.session.commit()
@@ -150,7 +151,21 @@ def item(item_id):
 
 @app.route("/add_item", methods=["GET", "POST"])
 def add_item():
-    return(render_template("add_item.html",categories=categories))
+
+    return(render_template("add_item.html",categories=categories, add_item = AddItemForm()))
+
+@app.route("/add_item_submit", methods=["POST"])
+def add_item_submit():
+    add_item_form = AddItemForm()
+    if add_item_form.validate_on_submit():
+
+        item = Item(name = add_item_form.name.data, description = add_item_form.description.data)
+        db.session.add(item)
+        try:
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+    return(redirect(url_for("list",category = "todo")))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
