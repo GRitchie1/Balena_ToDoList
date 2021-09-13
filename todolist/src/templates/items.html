@@ -47,11 +47,11 @@
         <td class = "step-actions">
         <form method="POST">
           {% if step.complete == False %}
-          <input type="submit" class="comp" name="{{step.id}}" value="Y">
+          <input type="submit" class="pos" name="{{step.id}}" value="Y">
           {% elif step.complete == True %}
-          <input type="submit" class="uncomp" name="{{step.id}}" value="X">
+          <input type="submit" class="neg" name="{{step.id}}" value="X">
           {% endif %}
-          <input type="submit" class="del" name="{{step.id}}" value="DEL">
+          <input type="submit" class="neg" name="{{step.id}}" value="DEL">
 
         </form>
         </td>
@@ -79,11 +79,11 @@
     <div class = item-btns">
       <form method="POST">
         {% if item.complete == False %}
-        <input type="submit" class="comp" name="{{item.id}}" value="Complete Item">
+        <input type="submit" class="pos" name="{{item.id}}" value="Complete Item">
         {% elif item.complete == True %}
-        <input type="submit" class="uncomp" name="{{item.id}}" value="Uncomplete Item">
+        <input type="submit" class="neg" name="{{item.id}}" value="Uncomplete Item">
         {% endif %}
-        <input type="submit" class="del" name="{{item.id}}" value="Delete">
+        <input type="submit" class="neg" name="{{item.id}}" value="Delete">
       </form>
     </div>
   </div>

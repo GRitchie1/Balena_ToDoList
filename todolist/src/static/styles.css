@@ -87,33 +87,19 @@ a:hover {
 .item-container:nth-child(even) {background-color:lightgray;}
 
 
-
-input.comp {
+input.pos {
     background-color: #5cb85c;
+    font-size: 1.1em;
 }
-
-input.uncomp {
+input.neg {
     background-color: #d9534f;
+    font-size: 1.1em;
 }
 
-input.rand {
-    background-color: #5cb85c;
-    font-size: 1.5em;
-}
-input.snooze {
-    background-color: #d9534f;
-    font-size: 1.5em;
+input.neutral {
+    font-size: 1.1em;
 }
 
-input.del {
-    background-color: #d9534f;
-    font-size: 1.5em;
-}
-
-input.add {
-    background-color: #5cb85c;
-    font-size: 1.5em;
-}
 
 .random{
   border:2px solid lightslategray;

@@ -20,7 +20,7 @@
       <tr class = "item-container">
         <td class="add-item">
         <form method="POST">
-          <input type="submit" class="add" name="Add" value="Add New Item">
+          <input type="submit" class="pos" name="Add" value="Add New Item">
         </form>
         </td>
         <td class="desc">  </td>
@@ -41,11 +41,11 @@
           <td class="item-form">
             <form method="POST">
               {% if item.complete == False %}
-              <input type="submit" class="comp" name="{{item.id}}" value="Y">
+              <input type="submit" class="pos" name="{{item.id}}" value="Y">
               {% elif item.complete == True %}
-              <input type="submit" class="uncomp" name="{{item.id}}" value="X">
+              <input type="submit" class="neg" name="{{item.id}}" value="X">
               {% endif %}
-              <input type="submit" class="edit" name="{{item.id}}" value="Edit">
+              <input type="submit" class="neutral" name="{{item.id}}" value="Edit">
             </form>
           </td>
         </tr>
@@ -63,11 +63,11 @@
 
     <div class = random-btns">
     <form method="POST">
-      <input type="submit" class="rand" name="rand" value="Random">
+      <input type="submit" class="pos" name="rand" value="Random">
       {% if random_item.name %}
-      <input type="submit" class="snooze" name="{{random_item.id}}" value="Snooze">
+      <input type="submit" class="neg" name="{{random_item.id}}" value="Snooze">
       {% endif %}
-      <input type="submit" class="snooze" name="snooze_reset" value="Reset Snooze">
+      <input type="submit" class="neg" name="snooze_reset" value="Reset Snooze">
     </form>
     </div>
   </div>
