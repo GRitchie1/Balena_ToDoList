@@ -4,6 +4,7 @@ import random
 import csv
 import os
 from forms import AddItemForm, AddStepForm
+from gevent.pywsgi import WSGIServer
 
 
 app = Flask(__name__)
@@ -197,4 +198,5 @@ def add_step_submit(item_id):
     return(redirect(url_for("item",item_id = item_id)))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    http_server = WSGIServer(('', 80), app)
+    http_server.serve_forever()
