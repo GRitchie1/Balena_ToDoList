@@ -37,7 +37,7 @@ class Item(db.Model):
 class Step(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50), index = True, unique = False)
-    number = db.Column(db.Float, unique = False) #Steps placement
+    number = db.Column(db.Integer, unique = False) #Steps placement
     complete = db.Column(db.Boolean, default=False, nullable=False)
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'))
 
@@ -46,7 +46,7 @@ class Step(db.Model):
 
 
 #Remove database each restart for testing
-#if os.path.exists('toDoListDB.db'):
+#f os.path.exists('toDoListDB.db'):
 #  os.remove('toDoListDB.db')
 
 db.create_all() #Create database - initialise tables
@@ -133,6 +133,7 @@ def item(item_id):
 
        [(name, action)] = request.form.items()
 
+       #Item Actions
        if action == COMP_ACTION:
            item = Item.query.get(name)
            item.complete = True
@@ -147,8 +148,6 @@ def item(item_id):
            db.session.commit()
            return redirect(url_for("list",category = "todo"))
 
-    #step = Step("Step 1",1)
-    #item.add_step(step)
     return render_template("items.html", categories=categories,item=item, add_step = AddStepForm())
 
 @app.route("/add_item", methods=["GET", "POST"])
@@ -174,7 +173,9 @@ def add_step_submit(item_id):
     add_step_form = AddStepForm()
     if add_step_form.validate_on_submit():
 
-        step = Step(name = add_step_form.name.data, number = add_step_form.number.data, item_id = item_id)
+        item = Item.query.get(item_id)
+        steps_count = len(item.steps.all()) + 1
+        step = Step(name = add_step_form.name.data, number = steps_count, item_id = item_id)
         db.session.add(step)
         try:
             db.session.commit()

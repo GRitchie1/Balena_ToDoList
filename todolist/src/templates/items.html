@@ -30,7 +30,7 @@
     </div>
     <div class = item-steps">
       {% for step in item.steps %}
-        <p>{{step.number}} - {{step.name}} </p>
+        <p>Step {{step.number}}: {{step.name}} </p>
         <p>Complete: {{step.complete}}</p>
       {% endfor %}
 
@@ -43,10 +43,6 @@
                 <td>{{add_step.name.label}}</td>
                 <td>{{add_step.name()}}</td>
 
-              </tr>
-              <tr>
-                <td>{{add_step.number.label}}</td>
-                <td>{{add_step.number()}}</td>
               </tr>
               <tr>
                 <td>{{add_step.submit()}}</td>

@@ -18,5 +18,4 @@ class AddItemForm(FieldsRequiredForm):
 
 class AddStepForm(FieldsRequiredForm):
    name  = StringField("Step Name", validators=[DataRequired()])
-   number = DecimalField("Step Number", validators=[DataRequired()])
-   submit = SubmitField("Add Item")
+   submit = SubmitField("Add Step")
