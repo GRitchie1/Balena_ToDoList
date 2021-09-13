@@ -15,20 +15,24 @@
 </header>
 
 <div class="lists-grid-container">
-
-  <div class = "lists-add-new-item">
-
-  <form method="POST">
-    <input type="submit" class="add" name="Add" value="Add New Item">
-  </form>
-
-  </div>
-
-
-
   <table id= itemtable>
-
     <tbody>
+      <tr class = "item-container">
+        <td class="add-item">
+        <form method="POST">
+          <input type="submit" class="add" name="Add" value="Add New Item">
+        </form>
+        </td>
+        <td class="desc">  </td>
+        <td class="item-form">  </td>
+      </tr>
+      <tr class = "item-container">
+        <td class="add-item">
+          <h2> Item </h2>
+        </td>
+        <td class="desc"> <h2> Description </h2> </td>
+        <td class="item-form"> <h2> Actions </h2> </td>
+      </tr>
 
         {% for item in list_items %}
         <tr class = "item-container">
@@ -41,11 +45,6 @@
               {% elif item.complete == True %}
               <input type="submit" class="uncomp" name="{{item.id}}" value="X">
               {% endif %}
-            </form>
-          </td>
-
-          <td class="item-edit">
-            <form method="POST">
               <input type="submit" class="edit" name="{{item.id}}" value="Edit">
             </form>
           </td>

@@ -15,6 +15,16 @@ h1 {
     font-size: 3em;
 }
 
+h2 {
+    color: black;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 1000;
+    font-size: 1.6em;
+    margin:0px;
+}
+
+
 header {
   background-color: grey;
   margin-top:-25px;
@@ -39,34 +49,27 @@ a:hover {
 }
 
 .item {
-  grid-area: itm;
   padding:10px;
 }
 .desc {
-  grid-area: desc;
   border-left:2px solid lightslategray;
   border-right:2px solid lightslategray;
-  padding-left:30px;
   padding:10px;
 }
 .item-form {
-  grid-area: btns;
   padding:10px;
 }
 .item-edit {
-  grid-area: edit;
   padding:10px;
 }
 
 .item-container {
     display: grid;
-    grid-template-areas:
-      'itm itm itm desc desc desc desc desc desc btns edit';
-    column-gap: 70px;
     margin-left: 20px;
     border-bottom: 2px solid lightslategray;
     border-left: 2px solid lightslategray;
     border-right: 2px solid lightslategray;
+    grid-template-columns: 20% 70% 10%;
 
  }
 
@@ -149,9 +152,4 @@ input.add {
 
 .item-left-menu{
   grid-row: 1 / span 2;
-}
-
-.lists-add-new-item{
-  grid-column: 1 / span 3;
-  margin-left:20px;
 }
