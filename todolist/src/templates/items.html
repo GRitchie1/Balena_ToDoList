@@ -28,15 +28,23 @@
       <p> {{item.description}} </p>
 
     </div>
-    <div class = item-steps">
-      <table>
+
+    <div class = "steps-container">
+    <table id = "steptable">
         <tbody>
+          <tr class = "step-container">
+            <td class = "step-number"><h2>Step</h2></td>
+            <td class = "step-name"><h2>Step Name</h2></td>
+            <td class = "step-complete"><h2>Complete</h2></td>
+            <td class = "step-actions"><h2>Actions</h2></td>
+          </tr>
 
       {% for step in item.steps %}
-        <tr>
-        <td>Step {{step.number}}: {{step.name}} </td>
-        <td>Complete: {{step.complete}}</td>
-        <td>
+        <tr class = "step-container">
+        <td class = "step-number">{{step.number}}</td>
+        <td class = "step-name">{{step.name}}</td>
+        <td class = "step-complete">{{step.complete}}</td>
+        <td class = "step-actions">
         <form method="POST">
           {% if step.complete == False %}
           <input type="submit" class="comp" name="{{step.id}}" value="Y">
@@ -48,6 +56,7 @@
         </form>
         </td>
       {% endfor %}
+
 
       <form action = "{{url_for('add_step_submit', item_id = item.id)}}" class="addform"  method="POST" >
 

@@ -142,7 +142,7 @@ input.add {
 .item-grid-container {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 10% 65% 25%;
+  grid-template-columns: 10% 30% 60%;
   padding: 10px;
   margin-right:20px;
   width:100%;
@@ -152,4 +152,46 @@ input.add {
 
 .item-left-menu{
   grid-row: 1 / span 2;
+}
+
+
+
+.step-container {
+    display: grid;
+    border-bottom: 2px solid lightslategray;
+    border-left: 2px solid lightslategray;
+    border-right: 2px solid lightslategray;
+    grid-template-columns: 10% 30% 30% 30%;
+    width :100%;
+ }
+
+ .step-container:first-child {border-top: 2px solid lightslategray;}
+ .step-container:nth-child(odd) {background-color:inherit;}
+ .step-container:nth-child(even) {background-color:lightgray;}
+
+
+.steps-container{
+    grid-template-columns: 100%;
+    width:90%;
+}
+
+#steptable{
+  width:100%;
+}
+
+
+.step-number {
+  padding:10px;
+  border-right:2px solid lightslategray;
+}
+.step-name {
+  border-right:2px solid lightslategray;
+  padding:10px;
+}
+.step-complete {
+  border-right:2px solid lightslategray;
+  padding:10px;
+}
+.step-actions {
+  padding:10px;
 }
