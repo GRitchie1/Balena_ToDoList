@@ -127,17 +127,14 @@ input.neutral {
 
 .item-grid-container {
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 10% 30% 60%;
-  padding: 10px;
-  margin-right:20px;
-  width:100%;
+  grid-gap: 50px;
+  grid-template-columns: 40% 60%;
+  padding: 30px 50px 50px 50px;
+  margin: 50px 20px 0px 100px;
+  width:85%;
   height: 80%;
-}
-
-
-.item-left-menu{
-  grid-row: 1 / span 2;
+  background-color: lightgray;
+  border: 5px solid lightslategray;
 }
 
 
@@ -152,7 +149,7 @@ input.neutral {
  }
 
  .step-container:first-child {border-top: 2px solid lightslategray;}
- .step-container:nth-child(odd) {background-color:inherit;}
+ .step-container:nth-child(odd) {background-color:white;}
  .step-container:nth-child(even) {background-color:lightgray;}
 
 
@@ -180,4 +177,15 @@ input.neutral {
 }
 .step-actions {
   padding:10px;
+}
+
+
+.item-info{
+  background-color: white ;
+  border:2px solid lightslategray;
+  padding:20px;
+}
+
+.item-name{
+  grid-column: 1 / span 2;
 }

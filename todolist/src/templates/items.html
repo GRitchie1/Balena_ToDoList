@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<header>
-<h1>{{item.name | title}} </h1>
 
 <div class="navbar">
 
@@ -12,16 +10,17 @@
   {% endfor %}
 
   </div>
-</header>
 
 
 
 
 <div class="item-grid-container">
-  <div class ="item-left-menu">
 
-    </div>
-    <div class = item-info">
+  <div class ="item-name">
+    <h1>{{item.name | title}} </h1>
+  </div>
+    <div class = "item-info">
+
       <h3>Complete</h3>
       <p> {{item.complete}} </p>
       <h3>Description</h3>
@@ -30,6 +29,7 @@
     </div>
 
     <div class = "steps-container">
+    {% if item.steps[0]%}
     <table id = "steptable">
         <tbody>
           <tr class = "step-container">
@@ -38,6 +38,9 @@
             <td class = "step-complete"><h2>Complete</h2></td>
             <td class = "step-actions"><h2>Actions</h2></td>
           </tr>
+    {% else %}
+      <h4> Add Steps </h4>
+     {% endif %}
 
       {% for step in item.steps %}
         <tr class = "step-container">
