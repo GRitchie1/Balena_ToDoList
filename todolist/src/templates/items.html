@@ -29,9 +29,24 @@
 
     </div>
     <div class = item-steps">
+      <table>
+        <tbody>
+
       {% for step in item.steps %}
-        <p>Step {{step.number}}: {{step.name}} </p>
-        <p>Complete: {{step.complete}}</p>
+        <tr>
+        <td>Step {{step.number}}: {{step.name}} </td>
+        <td>Complete: {{step.complete}}</td>
+        <td>
+        <form method="POST">
+          {% if step.complete == False %}
+          <input type="submit" class="comp" name="{{step.id}}" value="Y">
+          {% elif step.complete == True %}
+          <input type="submit" class="uncomp" name="{{step.id}}" value="X">
+          {% endif %}
+          <input type="submit" class="del" name="{{step.id}}" value="DEL">
+
+        </form>
+        </td>
       {% endfor %}
 
       <form action = "{{url_for('add_step_submit', item_id = item.id)}}" class="addform"  method="POST" >
@@ -55,9 +70,9 @@
     <div class = item-btns">
       <form method="POST">
         {% if item.complete == False %}
-        <input type="submit" class="comp" name="{{item.id}}" value="Y">
+        <input type="submit" class="comp" name="{{item.id}}" value="Complete Item">
         {% elif item.complete == True %}
-        <input type="submit" class="uncomp" name="{{item.id}}" value="X">
+        <input type="submit" class="uncomp" name="{{item.id}}" value="Uncomplete Item">
         {% endif %}
         <input type="submit" class="del" name="{{item.id}}" value="Delete">
       </form>

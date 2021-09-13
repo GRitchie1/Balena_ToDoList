@@ -134,11 +134,11 @@ def item(item_id):
        [(name, action)] = request.form.items()
 
        #Item Actions
-       if action == COMP_ACTION:
+       if action == "Complete Item":
            item = Item.query.get(name)
            item.complete = True
            db.session.commit()
-       elif action == UNCOMP_ACTION:
+       elif action == "Uncomplete Item":
            item = Item.query.get(name)
            item.complete = False
            db.session.commit()
@@ -147,6 +147,19 @@ def item(item_id):
            db.session.delete(item)
            db.session.commit()
            return redirect(url_for("list",category = "todo"))
+       #Step Actions
+       elif action == "Y":
+           step = Step.query.get(name)
+           step.complete = True
+           db.session.commit()
+       elif action == "X":
+           step = Step.query.get(name)
+           step.complete = False
+           db.session.commit()
+       elif action == "DEL":
+           step = Step.query.get(name)
+           db.session.delete(step)
+           db.session.commit()
 
     return render_template("items.html", categories=categories,item=item, add_step = AddStepForm())
 
