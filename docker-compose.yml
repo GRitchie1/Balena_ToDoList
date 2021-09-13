@@ -1,7 +1,11 @@
 version: '2'
+volumes:
+  todolist-data:
 services:
   todolist:
     build: ./todolist
+    volumes:
+      - 'todolist-data:/data'
     restart: always
     privileged: true
     network_mode: host
