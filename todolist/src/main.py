@@ -47,7 +47,7 @@ class Step(db.Model):
 
 
 #Remove database each restart for testing
-#f os.path.exists('toDoListDB.db'):
+#if os.path.exists('toDoListDB.db'):
 #  os.remove('toDoListDB.db')
 
 db.create_all() #Create database - initialise tables
