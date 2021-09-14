@@ -199,3 +199,10 @@ input.neutral {
   border-radius:50px;
   margin-top:40px;#
 }
+
+.step-traffic-light{
+  float:left;
+  width: 100%;
+  height: 40px;
+  border: 2px solid lightslategray;
+}

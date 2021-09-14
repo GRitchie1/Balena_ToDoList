@@ -78,7 +78,11 @@
         <tr class = "step-container">
         <td class = "step-number">{{step.number}}</td>
         <td class = "step-name">{{step.name}}</td>
-        <td class = "step-complete">{{step.complete}}</td>
+        {% if step.complete == True %}
+        <td class = "step-complete"><div class = "step-traffic-light" style = "background-color:#5cb85c;"></div></td>
+        {% elif step.complete == False %}
+        <td class = "step-complete" > <div class = "step-traffic-light" style = "background-color:#d9534f;"></div></td>
+        {% endif %}
         <td class = "step-actions">
         <form method="POST">
           {% if step.complete == False %}
