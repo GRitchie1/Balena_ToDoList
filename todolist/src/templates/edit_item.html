@@ -84,10 +84,13 @@
           <input type="submit" class="neg" name="{{step.id}}" value="X">
           {% endif %}
           <input type="submit" class="neg" name="{{step.id}}" value="DEL">
-
+          <input type="submit" class="neutral" name="{{step.id}}" value="UP">
+          <input type="submit" class="neutral" name="{{step.id}}" value="DOWN">
         </form>
         </td>
       {% endfor %}
+    </tr>
+  </table>
 
 
       <form action = "{{url_for('add_step_submit', item_id = item.id)}}" class="addform"  method="POST" >

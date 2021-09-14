@@ -140,11 +140,6 @@ def item(item_id):
            item = Item.query.get(name)
            item.complete = False
            db.session.commit()
-       elif action == "Delete":
-           item = Item.query.get(name)
-           db.session.delete(item)
-           db.session.commit()
-           return redirect(url_for("list",category = "todo"))
        elif action == "Edit":
            return redirect(url_for("edit_item",item_id = name))
        #Step Actions
@@ -155,30 +150,6 @@ def item(item_id):
        elif action == "X":
            step = Step.query.get(name)
            step.complete = False
-           db.session.commit()
-       elif action == "DEL":
-           step = Step.query.get(name)
-           db.session.delete(step)
-           db.session.commit()
-       elif action == "UP":
-           up_step = Step.query.get(name)
-           item = Item.query.get(up_step.item_id)
-           down_step = up_step
-           for step in item.steps:
-               if step.number == up_step.number + 1:
-                   down_step = step
-           down_step.number = down_step.number - 1
-           up_step.number = up_step.number + 1
-           db.session.commit()
-       elif action == "DOWN":
-           down_step = Step.query.get(name)
-           item = Item.query.get(down_step.item_id)
-           up_step = down_step
-           for step in item.steps:
-               if step.number == down_step.number - 1:
-                   up_step = step
-           down_step.number = down_step.number - 1
-           up_step.number = up_step.number + 1
            db.session.commit()
 
     return render_template("items.html", categories=categories,item=item, steps = Step.query.filter(Step.item_id == item.id).order_by(Step.number),add_step = AddStepForm())
@@ -208,6 +179,57 @@ def add_item_submit():
 @app.route("/edit_item/<item_id>", methods=["GET", "POST"])
 def edit_item(item_id):
     item = Item.query.get(item_id)
+    if request.method == "POST":
+        [(name, action)] = request.form.items()
+
+        #Item Actions
+        if action == "Complete":
+            item = Item.query.get(name)
+            item.complete = True
+            db.session.commit()
+        elif action == "Uncomplete":
+            item = Item.query.get(name)
+            item.complete = False
+            db.session.commit()
+        elif action == "Delete":
+            item = Item.query.get(name)
+            db.session.delete(item)
+            db.session.commit()
+            return redirect(url_for("list",category = "todo"))
+
+        #Step Actions
+        elif action == "Y":
+            step = Step.query.get(name)
+            step.complete = True
+            db.session.commit()
+        elif action == "X":
+            step = Step.query.get(name)
+            step.complete = False
+            db.session.commit()
+        elif action == "DEL":
+            step = Step.query.get(name)
+            db.session.delete(step)
+            db.session.commit()
+        elif action == "UP":
+            up_step = Step.query.get(name)
+            item = Item.query.get(up_step.item_id)
+            down_step = up_step
+            for step in item.steps:
+                if step.number == up_step.number + 1:
+                    down_step = step
+            down_step.number = down_step.number - 1
+            up_step.number = up_step.number + 1
+            db.session.commit()
+        elif action == "DOWN":
+            down_step = Step.query.get(name)
+            item = Item.query.get(down_step.item_id)
+            up_step = down_step
+            for step in item.steps:
+                if step.number == down_step.number - 1:
+                    up_step = step
+            down_step.number = down_step.number - 1
+            up_step.number = up_step.number + 1
+            db.session.commit()
 
     return(render_template("edit_item.html",categories=categories, item=item, steps = Step.query.filter(Step.item_id == item.id).order_by(Step.number), edit_item = EditItemForm(name=item.name,description=item.description), add_step = AddStepForm()))
 
@@ -220,7 +242,7 @@ def edit_item_submit(item_id):
         item.name = edit_item_form.name.data
         item.description = edit_item_form.description.data
         db.session.commit()
-    return(redirect(url_for("list",category = "todo")))
+    return(redirect(url_for("item",item_id = item_id)))
 
 
 
@@ -238,7 +260,7 @@ def add_step_submit(item_id):
             db.session.commit()
         except Exception:
             db.session.rollback()
-    return(redirect(url_for("item",item_id = item_id)))
+    return(redirect(url_for("edit_item",item_id = item_id)))
 
 
 
