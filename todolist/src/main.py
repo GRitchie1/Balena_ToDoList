@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 categories = {"todo":"To Do","complete":"Complete",}
 
 
-random_item = []
+random_item = { 'name': ''}
 
 
 class Item(db.Model):
@@ -27,6 +27,7 @@ class Item(db.Model):
     complete = db.Column(db.Boolean, default=False, nullable=False)
     snoozed = db.Column(db.Boolean, default=False, nullable=False)
     steps = db.relationship('Step', backref='item', lazy = 'dynamic', cascade = "all, delete, delete-orphan")
+    snooze_count = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return "Item ID: {}, Name: {}, Description: {}, Snoozed: {}, Complete: {}".format(self.id, self.name, self.description, self.snoozed, self.complete)
@@ -104,13 +105,20 @@ def list(category):
         #Random item actions
         elif action == "Random":
             rand_items = Item.query.filter(Item.snoozed == False, Item.complete == False).all()
-            random_item = random.choice(rand_items)
+            if len(rand_items) > 0:
+                random_item = random.choice(rand_items)
+            else:
+                random_item = { 'name': ''};
         elif action == "Snooze":
             item = Item.query.get(name)
             item.snoozed = True
+            item.snooze_count = item.snooze_count + 1
             db.session.commit()
             rand_items = Item.query.filter(Item.snoozed == False, Item.complete == False).all()
-            random_item = random.choice(rand_items)
+            if len(rand_items) > 0:
+                random_item = random.choice(rand_items)
+            else:
+                random_item = { 'name': ''};
         elif action == "Reset Snooze":
             snoozed_items = Item.query.filter(Item.snoozed == True).all()
             for item in snoozed_items:

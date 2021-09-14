@@ -56,9 +56,12 @@
 
   <div class = "random">
     <div class = random-info">
+    {% if random_item.name[0] %}
     <h3>Todays random item is: </h3>
     <h1> {{random_item.name}} </h1>
     <p> {{random_item.description}} </p>
+    <p> Snoozed {{random_item.snooze_count}} Times</p>
+    {% endif %}
     </div>
 
     <div class = random-btns">
