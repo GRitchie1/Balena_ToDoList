@@ -49,19 +49,19 @@ class Step(db.Model):
 db.create_all() #Create database - initialise tables
 
 #Data for testing
-with open("/usr/src/app/data.csv", "r") as csvfile:
-    list_items = csv.reader(csvfile)
-    id_counter = 0
-    for row in list_items:
-        id_counter=id_counter+1
-        item = Item(id = id_counter, name = row[0], description = row[1], complete = False)
-        step = Step(name= "Step 1", number = 1, item_id = id_counter)
-        db.session.add(item)
-        db.session.add(step)
-        try:
-            db.session.commit()
-        except Exception:
-            db.session.rollback()
+#with open("/usr/src/app/data.csv", "r") as csvfile:
+#    list_items = csv.reader(csvfile)
+#    id_counter = 0
+#    for row in list_items:
+#        id_counter=id_counter+1
+#        item = Item(id = id_counter, name = row[0], description = row[1], complete = False)
+#        step = Step(name= "Step 1", number = 1, item_id = id_counter)
+#        db.session.add(item)
+#        db.session.add(step)
+#        try:
+#            db.session.commit()
+#        except Exception:
+#            db.session.rollback()
 
 
 
