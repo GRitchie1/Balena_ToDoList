@@ -177,12 +177,12 @@ def add_item_submit():
     add_item_form = AddItemForm()
     if add_item_form.validate_on_submit():
 
-        if edit_item_form.priority.data > 99:
+        if add_item_form.priority.data > 99:
             priority = 99
-        elif edit_item_form.priority.data < 0:
+        elif add_item_form.priority.data < 0:
             priority = 0
         else:
-            priority = edit_item_form.priority.data
+            priority = add_item_form.priority.data
 
         item = Item(name = add_item_form.name.data, description = add_item_form.description.data, priority = priority)
         db.session.add(item)
