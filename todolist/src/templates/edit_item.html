@@ -67,8 +67,7 @@
             <td class = "step-complete"><h2>Complete</h2></td>
             <td class = "step-actions"><h2>Actions</h2></td>
           </tr>
-    {% else %}
-      <h4> Add Steps </h4>
+
      {% endif %}
 
       {% for step in steps %}
@@ -94,7 +93,7 @@
 
 
       <form action = "{{url_for('add_step_submit', item_id = item.id)}}" class="addform"  method="POST" >
-
+          <h4> Add Steps </h4>
           {{ add_step.hidden_tag() }}
           <table>
             <tbody>

@@ -210,7 +210,7 @@ def edit_item(item_id):
             step = Step.query.get(name)
             db.session.delete(step)
             db.session.commit()
-        elif action == "UP":
+        elif action == "DOWN":                        #Increase number, but move down list
             up_step = Step.query.get(name)
             item = Item.query.get(up_step.item_id)
             down_step = up_step
@@ -220,7 +220,7 @@ def edit_item(item_id):
             down_step.number = down_step.number - 1
             up_step.number = up_step.number + 1
             db.session.commit()
-        elif action == "DOWN":
+        elif action == "UP":                      #Decrease number but move up list
             down_step = Step.query.get(name)
             item = Item.query.get(down_step.item_id)
             up_step = down_step
