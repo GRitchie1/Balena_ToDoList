@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, RadioField, DecimalField
+from wtforms import StringField, SubmitField, TextAreaField, RadioField, IntegerField
 from wtforms.validators import DataRequired
 
 class FieldsRequiredForm(FlaskForm):
@@ -14,6 +14,7 @@ categories = [(False,"To Do"), (True, "Complete")]
 class AddItemForm(FieldsRequiredForm):
   name  = StringField("Item Name", validators=[DataRequired()])
   description = TextAreaField("Item Description", validators=[DataRequired()])
+  priority = IntegerField("Priority", validators=[DataRequired()])
   submit = SubmitField("Add Item")
 
 class AddStepForm(FieldsRequiredForm):
@@ -23,4 +24,5 @@ class AddStepForm(FieldsRequiredForm):
 class EditItemForm(FieldsRequiredForm):
   name  = StringField("Item Name", validators=[DataRequired()])
   description = TextAreaField("Item Description", validators=[DataRequired()])
+  priority = IntegerField("Priority", validators=[DataRequired()])
   submit = SubmitField("Save Changes")

@@ -36,8 +36,20 @@
 
         {% for item in list_items %}
         <tr class = "item-container">
-          <td class="item">{{item['name']}}</td>
-          <td class="desc">{{item['description']}}</td>
+          <td class="item">
+            {% if category == "prioritised" %}
+            <p style = "color: green; font-weight:900;float:left;font-size:30px;padding:0px;margin:0px">{{item['priority']}}</p>
+            <p style = "float:right;">
+            {% else %}
+            <p style = "float:left;">
+            {% endif %}
+
+            {{item['name']}}
+            </p>
+
+
+          </td>
+          <td class="desc"><p style = "float:left;">{{item['description']}}</p></td>
           <td class="item-form">
             <form method="POST">
               {% if item.complete == False %}
@@ -47,6 +59,7 @@
               {% endif %}
               <input type="submit" class="neutral" name="{{item.id}}" value="Open">
             </form>
+
           </td>
         </tr>
 

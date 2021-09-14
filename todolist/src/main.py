@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data/toDoListDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to supress warning
 db = SQLAlchemy(app)
 
-categories = {"todo":"To Do","complete":"Complete",}
+categories = {"todo":"To Do","complete":"Complete","prioritised":"Prioritised",}
 
 
 random_item = { 'name': ''}
@@ -28,6 +28,7 @@ class Item(db.Model):
     snoozed = db.Column(db.Boolean, default=False, nullable=False)
     steps = db.relationship('Step', backref='item', lazy = 'dynamic', cascade = "all, delete, delete-orphan")
     snooze_count = db.Column(db.Integer, default=0)
+    priority = db.Column(db.Integer, unique = False, default=0) #Steps placement
 
     def __repr__(self):
         return "Item ID: {}, Name: {}, Description: {}, Snoozed: {}, Complete: {}".format(self.id, self.name, self.description, self.snoozed, self.complete)
@@ -83,6 +84,8 @@ def list(category):
         list_items = Item.query.filter(Item.complete == False)
     elif category == "complete":
         list_items = Item.query.filter(Item.complete == True)
+    elif category == "prioritised":
+        list_items = Item.query.filter(Item.complete == False).order_by(Item.priority)
     else:
         list_items = Item.query.all()
 
@@ -174,13 +177,20 @@ def add_item_submit():
     add_item_form = AddItemForm()
     if add_item_form.validate_on_submit():
 
-        item = Item(name = add_item_form.name.data, description = add_item_form.description.data)
+        if edit_item_form.priority.data > 99:
+            priority = 99
+        elif edit_item_form.priority.data < 0:
+            priority = 0
+        else:
+            priority = edit_item_form.priority.data
+
+        item = Item(name = add_item_form.name.data, description = add_item_form.description.data, priority = priority)
         db.session.add(item)
         try:
             db.session.commit()
         except Exception:
             db.session.rollback()
-    return(redirect(url_for("list",category = "todo")))
+        return(redirect(url_for("list",category = "todo")))
 
 
 #Edit Items
@@ -239,7 +249,7 @@ def edit_item(item_id):
             up_step.number = up_step.number + 1
             db.session.commit()
 
-    return(render_template("edit_item.html",categories=categories, item=item, steps = Step.query.filter(Step.item_id == item.id).order_by(Step.number), edit_item = EditItemForm(name=item.name,description=item.description), add_step = AddStepForm()))
+    return(render_template("edit_item.html",categories=categories, item=item, steps = Step.query.filter(Step.item_id == item.id).order_by(Step.number), edit_item = EditItemForm(name=item.name,description=item.description,priority=item.priority), add_step = AddStepForm()))
 
 @app.route("/<item_id>/edit_item_submit", methods=["POST"])
 def edit_item_submit(item_id):
@@ -249,6 +259,13 @@ def edit_item_submit(item_id):
         item = Item.query.get(item_id)
         item.name = edit_item_form.name.data
         item.description = edit_item_form.description.data
+
+        if edit_item_form.priority.data > 99:
+            item.priority = 99
+        elif edit_item_form.priority.data < 0:
+            item.priority = 0
+        else:
+            item.priority = edit_item_form.priority.data
         db.session.commit()
     return(redirect(url_for("item",item_id = item_id)))
 
