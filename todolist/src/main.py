@@ -9,7 +9,7 @@ from gevent.pywsgi import WSGIServer
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SECRET_PROJECT'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///toDoListDB.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data/toDoListDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to supress warning
 db = SQLAlchemy(app)
 
@@ -47,8 +47,8 @@ class Step(db.Model):
 
 
 #Remove database each restart for testing
-#if os.path.exists('toDoListDB.db'):
-#  os.remove('toDoListDB.db')
+#if os.path.exists('/data/toDoListDB.db'):
+#  os.remove('/data/toDoListDB.db')
 
 db.create_all() #Create database - initialise tables
 
