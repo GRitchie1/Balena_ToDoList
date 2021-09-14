@@ -185,7 +185,7 @@ def add_item_submit():
 
 
 #Edit Items
-@app.route("/<item_id>/edit_item", methods=["GET", "POST"])
+@app.route("/edit_item/<item_id>", methods=["GET", "POST"])
 def edit_item(item_id):
     item = Item.query.get(item_id)
 
