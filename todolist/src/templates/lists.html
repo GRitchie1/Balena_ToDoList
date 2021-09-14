@@ -17,39 +17,54 @@
 <div class="lists-grid-container">
   <table id= itemtable>
     <tbody>
-      <tr class = "item-container">
+      <tr class = "{% if category == 'timed' %}timed-item-container{% else %}item-container{% endif %}">
         <td class="add-item">
         <form method="POST">
           <input type="submit" class="pos" name="Add" value="Add New Item">
         </form>
         </td>
-        <td class="desc">  </td>
-        <td class="item-form">  </td>
       </tr>
-      <tr class = "item-container">
+      <tr class = "{% if category == 'timed' %}timed-item-container{% else %}item-container{% endif %}">
         <td class="add-item">
           <h2> Item </h2>
         </td>
         <td class="desc"> <h2> Description </h2> </td>
+        {% if category == "timed" %}
+        <td class="countdown"> <h2> Countdown </h2> </td>
+        {% endif %}
         <td class="item-form"> <h2> Actions </h2> </td>
       </tr>
 
         {% for item in list_items %}
-        <tr class = "item-container">
+        <tr class = "{% if category == 'timed' %}timed-item-container{% else %}item-container{% endif %}">
           <td class="item">
             {% if category == "prioritised" %}
-            <p style = "color: green; font-weight:900;float:left;font-size:30px;padding:0px;margin:0px">{{item['priority']}}</p>
-            <p style = "float:right;">
+              <p style = "color: green; font-weight:900;float:left;font-size:30px;padding:0px;margin:0px">{{item['priority']}}</p>
+              <p style = "float:right;">
             {% else %}
-            <p style = "float:left;">
+              <p style = "float:left;">
             {% endif %}
-
-            {{item['name']}}
-            </p>
-
-
+                {{item['name']}}
+              </p>
           </td>
-          <td class="desc"><p style = "float:left;">{{item['description']}}</p></td>
+          <td class="desc">
+            <p style = "float:left;">
+              {{item['description']}}
+            </p>
+          </td>
+
+
+          {% if category == "timed" %}
+            <td class="countdown">
+                <!-- insert countdown widget here for testing -->
+                <p id = "countdown" style = "float:left;">
+                    clock
+                </p>
+            </td>
+
+              {% endif %}
+
+
           <td class="item-form">
             <form method="POST">
               {% if item.complete == False %}

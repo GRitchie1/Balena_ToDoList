@@ -56,6 +56,10 @@ a:hover {
   border-right:2px solid lightslategray;
   padding:10px;
 }
+.countdown{
+  border-right:2px solid lightslategray;
+  padding:10px;
+}
 .item-form {
   padding:10px;
 }
@@ -85,6 +89,30 @@ a:hover {
 .item-container:first-child {border-top: 2px solid lightslategray;}
 .item-container:nth-child(odd) {background-color:inherit;}
 .item-container:nth-child(even) {background-color:lightgray;}
+
+
+.timed-item-container {                                    /*timed item container*/
+    display: grid;
+    margin-left: 20px;
+    border-bottom: 2px solid lightslategray;
+    border-left: 2px solid lightslategray;
+    border-right: 2px solid lightslategray;
+    grid-template-columns: 20% 50% 15% 15%;
+
+ }
+
+.timed-item-container > div.item {
+    text-align: right;
+
+}
+
+.timed-item-container > div {
+   background-color: lightgray;
+   text-align: left;
+}
+.timed-item-container:first-child {border-top: 2px solid lightslategray;}
+.timed-item-container:nth-child(odd) {background-color:inherit;}
+.timed-item-container:nth-child(even) {background-color:lightgray;}
 
 
 input.pos {
