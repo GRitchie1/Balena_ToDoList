@@ -69,7 +69,7 @@ a:hover {
     border-bottom: 2px solid lightslategray;
     border-left: 2px solid lightslategray;
     border-right: 2px solid lightslategray;
-    grid-template-columns: 20% 70% 10%;
+    grid-template-columns: 20% 65% 15%;
 
  }
 
@@ -180,7 +180,7 @@ input.neutral {
 }
 
 
-.item-info{
+.item-description{
   background-color: white ;
   border:2px solid lightslategray;
   padding:20px;
@@ -188,4 +188,14 @@ input.neutral {
 
 .item-name{
   grid-column: 1 / span 2;
+}
+
+
+.traffic-light{
+  float:left;
+  width: 50px;
+  height: 50px;
+  border: 2px solid lightslategray;
+  border-radius:50px;
+  margin-top:40px;#
 }

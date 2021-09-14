@@ -41,11 +41,11 @@
           <td class="item-form">
             <form method="POST">
               {% if item.complete == False %}
-              <input type="submit" class="pos" name="{{item.id}}" value="Y">
+              <input type="submit" class="pos" name="{{item.id}}" value="Complete">
               {% elif item.complete == True %}
-              <input type="submit" class="neg" name="{{item.id}}" value="X">
+              <input type="submit" class="neg" name="{{item.id}}" value="Uncomplete">
               {% endif %}
-              <input type="submit" class="neutral" name="{{item.id}}" value="Edit">
+              <input type="submit" class="neutral" name="{{item.id}}" value="Open">
             </form>
           </td>
         </tr>

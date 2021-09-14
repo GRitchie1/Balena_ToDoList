@@ -94,15 +94,15 @@ def list(category):
         [(name, action)] = request.form.items()
 
         #Item table actions
-        if action == COMP_ACTION:
+        if action == "Complete":
             item = Item.query.get(name)
             item.complete = True
             db.session.commit()
-        elif action == UNCOMP_ACTION:
+        elif action == "Uncomplete":
             item = Item.query.get(name)
             item.complete = False
             db.session.commit()
-        elif action == "Edit":
+        elif action == "Open":
             return redirect(url_for("item",item_id = name))
 
         #Random item actions

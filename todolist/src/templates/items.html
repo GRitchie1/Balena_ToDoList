@@ -19,14 +19,23 @@
 <div class="item-grid-container">
 
   <div class ="item-name">
-    <h1>{{item.name | title}} </h1>
+
+    {% if item.complete == True %}
+      <div class = "traffic-light" style = "background-color:#5cb85c;"></div>
+    {% else %}
+      <div class = "traffic-light" style = "background-color:#d9534f;"></div>
+    {% endif %}
+    <h1 style = "text-align:left; ">{{item.name | title}} </h1>
+
   </div>
     <div class = "item-info">
 
-      <h3>Complete</h3>
-      <p> {{item.complete}} </p>
+
+      <div class = "item-description">
       <h3>Description</h3>
       <p> {{item.description}} </p>
+      </div>
+
 
     </div>
 
