@@ -19,3 +19,8 @@ class AddItemForm(FieldsRequiredForm):
 class AddStepForm(FieldsRequiredForm):
    name  = StringField("Step Name", validators=[DataRequired()])
    submit = SubmitField("Add Step")
+
+class EditItemForm(FieldsRequiredForm):
+  name  = StringField("Item Name", validators=[DataRequired()])
+  description = TextAreaField("Item Description", validators=[DataRequired()])
+  submit = SubmitField("Save Changes")

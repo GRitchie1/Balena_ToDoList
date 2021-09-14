@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "/base.html" %}
 
 {% block content %}
 <header>
@@ -32,8 +32,26 @@
 
 
       <div class = "item-description">
-      <h3>Description</h3>
-      <p> {{item.description}} </p>
+        <h3>Edit</h3>
+        <form action = "{{url_for('edit_item_submit', item_id = item.id)}}" class="editform"  method="POST" >
+          {{ edit_item.hidden_tag() }}
+          <table>
+            <tbody>
+              <tr>
+                <td>{{edit_item.name.label}}</td>
+                <td>{{edit_item.name()}}</td>
+
+              </tr>
+              <tr>
+                <td>{{edit_item.description.label}}</td>
+                <td>{{edit_item.description()}}</td>
+              </tr>
+              <tr>
+                <td>{{edit_item.submit()}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
       </div>
 
 
@@ -90,6 +108,7 @@
         </form>
     </div>
 
+
     <div class = item-btns">
       <form method="POST">
         {% if item.complete == False %}
@@ -98,7 +117,6 @@
         <input type="submit" class="neg" name="{{item.id}}" value="Uncomplete">
         {% endif %}
         <input type="submit" class="neg" name="{{item.id}}" value="Delete">
-        <input type="submit" class="neutral" name="{{item.id}}" value="Edit">
       </form>
     </div>
   </div>

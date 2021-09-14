@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import random
 import csv
 import os
-from forms import AddItemForm, AddStepForm
+from forms import AddItemForm, AddStepForm, EditItemForm
 from gevent.pywsgi import WSGIServer
 
 
@@ -17,10 +17,6 @@ categories = {"todo":"To Do","complete":"Complete",}
 
 
 random_item = []
-
-#Actions
-COMP_ACTION = "Y"
-UNCOMP_ACTION = "X"
 
 
 class Item(db.Model):
@@ -136,11 +132,11 @@ def item(item_id):
        [(name, action)] = request.form.items()
 
        #Item Actions
-       if action == "Complete Item":
+       if action == "Complete":
            item = Item.query.get(name)
            item.complete = True
            db.session.commit()
-       elif action == "Uncomplete Item":
+       elif action == "Uncomplete":
            item = Item.query.get(name)
            item.complete = False
            db.session.commit()
@@ -149,6 +145,8 @@ def item(item_id):
            db.session.delete(item)
            db.session.commit()
            return redirect(url_for("list",category = "todo"))
+       elif action == "Edit":
+           return redirect(url_for("edit_item",item_id = name))
        #Step Actions
        elif action == "Y":
            step = Step.query.get(name)
@@ -165,6 +163,8 @@ def item(item_id):
 
     return render_template("items.html", categories=categories,item=item, add_step = AddStepForm())
 
+
+#Add Items
 @app.route("/add_item", methods=["GET", "POST"])
 def add_item():
 
@@ -183,6 +183,28 @@ def add_item_submit():
             db.session.rollback()
     return(redirect(url_for("list",category = "todo")))
 
+
+#Edit Items
+@app.route("/<item_id>/edit_item", methods=["GET", "POST"])
+def edit_item(item_id):
+    item = Item.query.get(item_id)
+
+    return(render_template("edit_item.html",categories=categories, item=item, edit_item = EditItemForm(name=item.name,description=item.description), add_step = AddStepForm()))
+
+@app.route("/<item_id>/edit_item_submit", methods=["POST"])
+def edit_item_submit(item_id):
+    edit_item_form = EditItemForm()
+    #Fix
+    if edit_item_form.validate_on_submit():
+        item = Item.query.get(item_id)
+        item.name = edit_item_form.name.data
+        item.description = edit_item_form.description.data
+        db.session.commit()
+    return(redirect(url_for("list",category = "todo")))
+
+
+
+#Add Steps
 @app.route("/<item_id>/add_step_submit", methods=["POST"])
 def add_step_submit(item_id):
     add_step_form = AddStepForm()
@@ -198,6 +220,9 @@ def add_step_submit(item_id):
             db.session.rollback()
     return(redirect(url_for("item",item_id = item_id)))
 
+
+
+#Start server
 if __name__ == '__main__':
     http_server = WSGIServer(('', 80), app)
     http_server.serve_forever()
