@@ -40,7 +40,7 @@
     </div>
 
     <div class = "steps-container">
-    {% if item.steps[0]%}
+    {% if steps[0]%}
     <table id = "steptable">
         <tbody>
           <tr class = "step-container">
@@ -53,7 +53,7 @@
       <h4> Add Steps </h4>
      {% endif %}
 
-      {% for step in item.steps %}
+      {% for step in steps %}
         <tr class = "step-container">
         <td class = "step-number">{{step.number}}</td>
         <td class = "step-name">{{step.name}}</td>
@@ -66,6 +66,8 @@
           <input type="submit" class="neg" name="{{step.id}}" value="X">
           {% endif %}
           <input type="submit" class="neg" name="{{step.id}}" value="DEL">
+          <input type="submit" class="neutral" name="{{step.id}}" value="UP">
+          <input type="submit" class="neutral" name="{{step.id}}" value="DOWN">
 
         </form>
         </td>

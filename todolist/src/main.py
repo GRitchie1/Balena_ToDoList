@@ -160,8 +160,28 @@ def item(item_id):
            step = Step.query.get(name)
            db.session.delete(step)
            db.session.commit()
+       elif action == "UP":
+           up_step = Step.query.get(name)
+           item = Item.query.get(up_step.item_id)
+           down_step = up_step
+           for step in item.steps:
+               if step.number == up_step.number + 1:
+                   down_step = step
+           down_step.number = down_step.number - 1
+           up_step.number = up_step.number + 1
+           db.session.commit()
+       elif action == "DOWN":
+           down_step = Step.query.get(name)
+           item = Item.query.get(down_step.item_id)
+           up_step = down_step
+           for step in item.steps:
+               if step.number == down_step.number - 1:
+                   up_step = step
+           down_step.number = down_step.number - 1
+           up_step.number = up_step.number + 1
+           db.session.commit()
 
-    return render_template("items.html", categories=categories,item=item, add_step = AddStepForm())
+    return render_template("items.html", categories=categories,item=item, steps = Step.query.filter(Step.item_id == item.id).order_by(Step.number),add_step = AddStepForm())
 
 
 #Add Items
@@ -189,7 +209,7 @@ def add_item_submit():
 def edit_item(item_id):
     item = Item.query.get(item_id)
 
-    return(render_template("edit_item.html",categories=categories, item=item, edit_item = EditItemForm(name=item.name,description=item.description), add_step = AddStepForm()))
+    return(render_template("edit_item.html",categories=categories, item=item, steps = Step.query.filter(Step.item_id == item.id).order_by(Step.number), edit_item = EditItemForm(name=item.name,description=item.description), add_step = AddStepForm()))
 
 @app.route("/<item_id>/edit_item_submit", methods=["POST"])
 def edit_item_submit(item_id):

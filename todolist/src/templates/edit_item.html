@@ -58,7 +58,7 @@
     </div>
 
     <div class = "steps-container">
-    {% if item.steps[0]%}
+    {% if steps[0]%}
     <table id = "steptable">
         <tbody>
           <tr class = "step-container">
@@ -71,7 +71,7 @@
       <h4> Add Steps </h4>
      {% endif %}
 
-      {% for step in item.steps %}
+      {% for step in steps %}
         <tr class = "step-container">
         <td class = "step-number">{{step.number}}</td>
         <td class = "step-name">{{step.name}}</td>
