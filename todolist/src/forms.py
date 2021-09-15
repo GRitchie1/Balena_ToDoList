@@ -17,7 +17,7 @@ class AddItemForm(FieldsRequiredForm):
   description = TextAreaField("Item Description", validators=[DataRequired()])
   priority = IntegerField("Priority", validators=[DataRequired()])
   due_date = DateField('Due Date')
-  due_time = TimeField('Due Time (H:M)',format = "%H:%M")
+  due_time = TimeField('Due Time (hh:mm)',format = "%H:%M")
   submit = SubmitField("Add Item")
 
 
@@ -30,5 +30,5 @@ class EditItemForm(FieldsRequiredForm):
   description = TextAreaField("Item Description", validators=[DataRequired()])
   priority = IntegerField("Priority", validators=[DataRequired()])
   due_date = DateField('Due Date')
-  due_time = TimeField('Due Time (H:M)',format = "%H:%M")
+  due_time = TimeField('Due Time (hh:mm)',format = "%H:%M")
   submit = SubmitField("Save Changes")
