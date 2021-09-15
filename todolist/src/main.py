@@ -94,7 +94,7 @@ def list(category):
         list_items = Item.query.filter(Item.complete == True)
     elif category == "prioritised":
         list_items = Item.query.filter(Item.complete == False).order_by(Item.priority)
-    if category == "timed":
+    elif category == "timed":
         list_items = Item.query.filter(Item.complete == False)
     else:
         list_items = Item.query.all()
