@@ -1,10 +1,15 @@
+#Installed
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from forms import AddItemForm, AddStepForm, EditItemForm
+from gevent.pywsgi import WSGIServer
+
+#Builtin
+from datetime import datetime
 import random
 import csv
 import os
-from forms import AddItemForm, AddStepForm, EditItemForm
-from gevent.pywsgi import WSGIServer
+
 
 TESTMODE = False;
 
@@ -30,6 +35,7 @@ class Item(db.Model):
     steps = db.relationship('Step', backref='item', lazy = 'dynamic', cascade = "all, delete, delete-orphan")
     snooze_count = db.Column(db.Integer, default=0)
     priority = db.Column(db.Integer, unique = False, default=0) #Steps placement
+    due_time = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return "Item ID: {}, Name: {}, Description: {}, Snoozed: {}, Complete: {}".format(self.id, self.name, self.description, self.snoozed, self.complete)
