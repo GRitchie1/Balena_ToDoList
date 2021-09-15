@@ -95,7 +95,7 @@ def list(category):
     elif category == "prioritised":
         list_items = Item.query.filter(Item.complete == False).order_by(Item.priority)
     elif category == "timed":
-        list_items = Item.query.filter(Item.complete == False)
+        list_items = Item.query.filter(Item.complete == False).order_by(Item.due_time)
     else:
         list_items = Item.query.all()
 
@@ -194,7 +194,9 @@ def add_item_submit():
         else:
             priority = add_item_form.priority.data
 
-        item = Item(name = add_item_form.name.data, description = add_item_form.description.data, priority = priority)
+        due_time = datetime.combine(add_item_form.due_date.data, add_item_form.due_time.data)
+
+        item = Item(name = add_item_form.name.data, description = add_item_form.description.data, priority = priority, due_time=due_time)
         db.session.add(item)
         try:
             db.session.commit()
@@ -259,7 +261,7 @@ def edit_item(item_id):
             up_step.number = up_step.number + 1
             db.session.commit()
 
-    return(render_template("edit_item.html",categories=categories, item=item, steps = Step.query.filter(Step.item_id == item.id).order_by(Step.number), edit_item = EditItemForm(name=item.name,description=item.description,priority=item.priority), add_step = AddStepForm()))
+    return(render_template("edit_item.html",categories=categories, item=item, steps = Step.query.filter(Step.item_id == item.id).order_by(Step.number), edit_item = EditItemForm(name=item.name,description=item.description,priority=item.priority, due_date=datetime.date(item.due_time),due_time=datetime.time(item.due_time)), add_step = AddStepForm()))
 
 @app.route("/<item_id>/edit_item_submit", methods=["POST"])
 def edit_item_submit(item_id):
@@ -269,6 +271,7 @@ def edit_item_submit(item_id):
         item = Item.query.get(item_id)
         item.name = edit_item_form.name.data
         item.description = edit_item_form.description.data
+        item.due_time = datetime.combine(edit_item_form.due_date.data, edit_item_form.due_time.data)
 
         if edit_item_form.priority.data > 99:
             item.priority = 99
