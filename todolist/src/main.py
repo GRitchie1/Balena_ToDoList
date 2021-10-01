@@ -38,6 +38,15 @@ def import_data():
             except Exception:
                 db.session.rollback()
 
+def export_data():
+    with open('/usr/src/app/export.csv','w') as csvfile:
+        writer = csv.writer(csvfile)
+        list_items = Item.query.all()
+        output = []
+        for item in list_items:
+            output.append([item.name, item.description, item.complete])
+        writer.writerows(output)
+
 
 #Start server
 if __name__ == '__main__':
@@ -46,6 +55,7 @@ if __name__ == '__main__':
 
     if TESTMODE:
         import_data()
+
 
     http_server = WSGIServer(('', 80), app)
     http_server.serve_forever()

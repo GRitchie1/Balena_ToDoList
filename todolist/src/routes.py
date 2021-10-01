@@ -1,9 +1,9 @@
 #From my files
 from forms import AddItemForm, AddStepForm, EditItemForm
-from __main__ import app, db
+from __main__ import app, db, export_data
 from models import Item, Step
 #Installed
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, send_file
 #Builtin
 from datetime import datetime
 import random
@@ -236,3 +236,14 @@ def add_step_submit(item_id):
         except Exception:
             db.session.rollback()
     return(redirect(url_for("edit_item",item_id = item_id)))
+
+
+@app.route("/downloadexportfile")
+def DownloadLogFile (path = "/usr/src/app/export.csv"):
+    export_data()
+    if path is None:
+        print("path is none")
+    try:
+        return send_file(path, as_attachment=True)
+    except Exception as e:
+        print("exception as e")
