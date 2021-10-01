@@ -1,15 +1,5 @@
-Tidy Room,,todo
-Washing,,todo
-XVS650 Parts,Order seat/pillion & handlebars,todo
-Charge intercom,,todo
-Sell Virago,,todo
-Shed,,todo
-Tattoos,,todo
-Online Courses,HTB/Codecademy/IBM/Github/LinkedIn,todo
-Van windows,Tint the van windows,todo
-Van Seat Covers,Buy/Install van seat covers,todo
-Van Leaks,Fix leaky fluids,todo
-Leather,Buy/Paint/Stud,todo
-Leopard Print,Finish,todo
-LinkedIn,Add people on linkedin,todo
-Band,Organise Practice,todo
+Persistent DB,Put database in the /data/ directory to make it peristent across device reboots
+Edit Item,"Make the edit Item page work to actually edit name, description"
+Order steps,Add functionality to re-order steps
+Sub steps ,Add functionality for Sub- steps (1.1 etc)
+Fix UI,"Make WebUI look better.  Add proper header, sidebar, etc."

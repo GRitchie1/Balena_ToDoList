@@ -17,36 +17,93 @@
 <div class="lists-grid-container">
   <table id= itemtable>
     <tbody>
-      <tr class = "item-container">
+      <tr class = "{% if category == 'timed' %}timed-item-container{% else %}item-container{% endif %}">
         <td class="add-item">
         <form method="POST">
           <input type="submit" class="pos" name="Add" value="Add New Item">
         </form>
         </td>
-        <td class="desc">  </td>
-        <td class="item-form">  </td>
       </tr>
-      <tr class = "item-container">
+      <tr class = "{% if category == 'timed' %}timed-item-container{% else %}item-container{% endif %}">
         <td class="add-item">
           <h2> Item </h2>
         </td>
         <td class="desc"> <h2> Description </h2> </td>
+        {% if category == "timed" %}
+        <td class="countdown"> <h2> Countdown </h2> </td>
+        {% endif %}
         <td class="item-form"> <h2> Actions </h2> </td>
       </tr>
 
         {% for item in list_items %}
-        <tr class = "item-container">
-          <td class="item">{{item['name']}}</td>
-          <td class="desc">{{item['description']}}</td>
+        <tr class = "{% if category == 'timed' %}timed-item-container{% else %}item-container{% endif %}">
+          <td class="item">
+            {% if category == "prioritised" %}
+              <p style = "color: green; font-weight:900;float:left;font-size:30px;padding:0px;margin:0px">{{item['priority']}}</p>
+              <p style = "float:right;">
+            {% else %}
+              <p style = "float:left;">
+            {% endif %}
+                {{item['name']}}
+              </p>
+          </td>
+          <td class="desc">
+            <p style = "float:left;">
+              {{item['description']}}
+            </p>
+          </td>
+
+
+          {% if category == "timed" %}
+            <td class="countdown">
+                <!-- insert countdown widget here for testing -->
+
+                <p id="countdown{{item.id}}">...</p>
+
+                  <script>
+                      // Set the date we're counting down to
+                      var countDownDate{{item.id}} = new Date("{{item.due_time}}").getTime();
+
+                      // Update the count down every 1 second
+                      var x{{item.id}} = setInterval(function() {
+
+                        // Get today's date and time
+                        var now{{item.id}} = new Date().getTime();
+
+                        // Find the distance between now and the count down date
+                        var distance{{item.id}} = countDownDate{{item.id}} - now{{item.id}};
+
+                        // Time calculations for days, hours, minutes and seconds
+                        var days{{item.id}} = Math.floor(distance{{item.id}} / (1000 * 60 * 60 * 24));
+                        var hours{{item.id}} = Math.floor((distance{{item.id}} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes{{item.id}} = Math.floor((distance{{item.id}} % (1000 * 60 * 60)) / (1000 * 60));
+
+                        // Display the result in the element with id="demo"
+                        document.getElementById("countdown{{item.id}}").innerHTML = days{{item.id}} + "d " + hours{{item.id}} + "h "
+                        + minutes{{item.id}} + "m ";
+
+                        // If the count down is finished, write some text
+                        if (distance{{item.id}} < 0) {
+                          clearInterval(x{{item.id}});
+                          document.getElementById("countdown{{item.id}}").innerHTML = "OVERDUE";
+                        }
+                      }, 1000);
+                    </script>
+            </td>
+
+              {% endif %}
+
+
           <td class="item-form">
             <form method="POST">
               {% if item.complete == False %}
-              <input type="submit" class="pos" name="{{item.id}}" value="Y">
+              <input type="submit" class="pos" name="{{item.id}}" value="Complete">
               {% elif item.complete == True %}
-              <input type="submit" class="neg" name="{{item.id}}" value="X">
+              <input type="submit" class="neg" name="{{item.id}}" value="Uncomplete">
               {% endif %}
-              <input type="submit" class="neutral" name="{{item.id}}" value="Edit">
+              <input type="submit" class="neutral" name="{{item.id}}" value="Open">
             </form>
+
           </td>
         </tr>
 
@@ -56,9 +113,12 @@
 
   <div class = "random">
     <div class = random-info">
+    {% if random_item.name[0] %}
     <h3>Todays random item is: </h3>
     <h1> {{random_item.name}} </h1>
     <p> {{random_item.description}} </p>
+    <p> Snoozed {{random_item.snooze_count}} Times</p>
+    {% endif %}
     </div>
 
     <div class = random-btns">
