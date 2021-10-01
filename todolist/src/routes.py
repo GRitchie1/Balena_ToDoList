@@ -1,8 +1,11 @@
 #From my files
 from forms import AddItemForm, AddStepForm, EditItemForm
-from __main__ import app, Item, Step, db
+from __main__ import app, db
+from models import Item, Step
 #Installed
 from flask import render_template, request, redirect, url_for
+#Builtin
+from datetime import datetime
 
 categories = {"todo":"To Do","complete":"Complete","prioritised":"Prioritised","timed":"Timed"}
 random_item = { 'name': ''}
