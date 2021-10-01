@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data/toDoListDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to supress warning
 db = SQLAlchemy(app)
 
-TESTMODE = True;
+TESTMODE = False;
 
 def import_data():
     #Remove database each restart for testing

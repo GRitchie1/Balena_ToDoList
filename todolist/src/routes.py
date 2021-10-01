@@ -6,6 +6,7 @@ from models import Item, Step
 from flask import render_template, request, redirect, url_for
 #Builtin
 from datetime import datetime
+import random
 
 categories = {"todo":"To Do","complete":"Complete","prioritised":"Prioritised","timed":"Timed"}
 random_item = { 'name': ''}
