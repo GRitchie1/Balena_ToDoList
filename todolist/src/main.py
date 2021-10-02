@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from gevent.pywsgi import WSGIServer
 
 #Builtin
+from datetime import datetime
 import random
 import csv
 import os
@@ -29,14 +30,33 @@ def import_data():
         id_counter = 0
         for row in list_items:
             id_counter=id_counter+1
-            item = Item(id = id_counter, name = row[0], description = row[1], complete = False)
+            for i in range(len(row)):
+                if row[i]=="TRUE":
+                    row[i]= True
+                elif row[i]=="FALSE":
+                    row[i] = False
+
+
+            item = Item(id = id_counter, name = row[1], description = row[2], complete = row[3], snoozed = row[4], snooze_count = row[5], priority= row[6], due_time = datetime.strptime(row[7], '%d/%m/%Y %H:%M'))
             step = Step(name= "Step 1", number = 1, item_id = id_counter)
+            print(item)
             db.session.add(item)
             db.session.add(step)
             try:
                 db.session.commit()
+                print("success")
             except Exception:
+                print("fail")
                 db.session.rollback()
+
+def export_data():
+    with open('/usr/src/app/export.csv','w') as csvfile:
+        writer = csv.writer(csvfile)
+        list_items = Item.query.all()
+        output = []
+        for item in list_items:
+            output.append([item.id, item.name, item.description, item.complete, item.snoozed, item.snooze_count, item.priority, item.due_time])
+        writer.writerows(output)
 
 
 #Start server
@@ -46,6 +66,7 @@ if __name__ == '__main__':
 
     if TESTMODE:
         import_data()
+
 
     http_server = WSGIServer(('', 80), app)
     http_server.serve_forever()

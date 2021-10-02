@@ -1,5 +1,5 @@
-Persistent DB,Put database in the /data/ directory to make it peristent across device reboots
-Edit Item,"Make the edit Item page work to actually edit name, description"
-Order steps,Add functionality to re-order steps
-Sub steps ,Add functionality for Sub- steps (1.1 etc)
-Fix UI,"Make WebUI look better.  Add proper header, sidebar, etc."
+1,Persistent DB,Put database in the /data/ directory to make it peristent across device reboots,TRUE,FALSE,0,0,01/10/2021 21:47
+2,Edit Item,"Make the edit Item page work to actually edit name, description",FALSE,FALSE,0,0,01/10/2021 21:47
+3,Order steps,Add functionality to re-order steps,FALSE,FALSE,0,0,01/10/2021 21:47
+4,Sub steps ,Add functionality for Sub- steps (1.1 etc),FALSE,FALSE,0,0,01/10/2021 21:47
+5,Fix UI,"Make WebUI look better.  Add proper header, sidebar, etc.",FALSE,FALSE,0,0,01/10/2021 21:47
