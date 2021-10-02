@@ -4,6 +4,7 @@ body {
     height:100%;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 
@@ -98,7 +99,6 @@ a:hover {
     border-left: 2px solid lightslategray;
     border-right: 2px solid lightslategray;
     grid-template-columns: 20% 50% 15% 15%;
-
  }
 
 .timed-item-container > div.item {
@@ -139,8 +139,6 @@ input.neutral {
   height:85%;
 
 }
-
-
 
 
 .lists-grid-container {
@@ -233,4 +231,17 @@ input.neutral {
   width: 100%;
   height: 40px;
   border: 2px solid lightslategray;
+}
+
+
+@media (max-width: 1000px) {
+   .random {
+      display: none;
+   }
+   .lists-grid-container {
+     grid-template-columns: 95% 0% 5%!important;
+   }
+   .timed-item-container, .item-container {
+     margin-left: 0px !important;
+   }
 }
