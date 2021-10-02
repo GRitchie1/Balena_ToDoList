@@ -20,3 +20,6 @@ services:
     ports:
         - '5011' # management API (optional)
         - '35173' # Chromium debugging port (optional)
+    environment:
+        - LAUNCH_URL='http://localhost'
+        - KIOSK=1
