@@ -18,8 +18,15 @@ services:
     privileged: true # required for UDEV to find plugged in peripherals such as a USB mouse
     network_mode: host
     ports:
-        - '5011' # management API (optional)
-        - '35173' # Chromium debugging port (optional)
+        - 5011:5011 # management API (optional)
+        - 35173:35173 # Chromium debugging port (optional)
     environment:
         - LAUNCH_URL='http://localhost'
         - KIOSK=1
+  dashrequests:
+    build: ./dashrequests
+    restart: always
+    privileged: true
+    network_mode: host
+    labels:
+      io.balena.features.supervisor-api: '1'
