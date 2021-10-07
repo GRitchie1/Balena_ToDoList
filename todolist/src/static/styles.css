@@ -223,7 +223,7 @@ input.neutral {
   height: 50px;
   border: 2px solid lightslategray;
   border-radius:50px;
-  margin-top:40px;#
+  margin-top:40px;
 }
 
 .step-traffic-light{
@@ -244,4 +244,34 @@ input.neutral {
    .timed-item-container, .item-container {
      margin-left: 0px !important;
    }
+   *{
+     font-size:10px;
+   }
+   body{
+     overflow: hidden;
+     width:100%;
+   }
+
+   .item-grid-container{
+     width: 80%;
+     background-color:red;
+     margin:20px auto;
+   }
+
+   .item-name{
+     height:60px;
+     overflow:hidden;
+     margin:0px;
+     padding:0px;
+     width:100%;
+   }
+   .traffic-light{
+     margin:0px 10px;
+   }
+
+   .item-name h1{
+     font-size: 20px;
+     margin:15px auto;
+   }
+
 }
