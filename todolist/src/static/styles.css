@@ -254,24 +254,31 @@ input.neutral {
 
    .item-grid-container{
      width: 80%;
-     background-color:red;
-     margin:20px auto;
+     margin:0px auto;
+     grid-gap: 0px 50px;
+     padding:10px 20px;
+     height:350px;
    }
 
    .item-name{
-     height:60px;
+     height:30px;
      overflow:hidden;
      margin:0px;
      padding:0px;
      width:100%;
    }
    .traffic-light{
+     height:20px;
+     border-radius: 2px;
      margin:0px 10px;
    }
 
    .item-name h1{
      font-size: 20px;
-     margin:15px auto;
+     margin:0px auto;
+   }
+   .item-info{
+     margin: 0px auto;
    }
 
 }
